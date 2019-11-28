@@ -12,17 +12,13 @@ const footerStyle = {
   color: '#ffffff',
 };
 
-const logoStyle = {
-  //marginLeft: 'auto'
-};
-
 const copyrightStyle = {
   marginLeft: '150px',
 };
 
 const Footer = () => (
   <div style={footerStyle}>
-    <img src={TheoremLogo} alt="Theorem Logo" style={logoStyle} />
+    <img src={TheoremLogo} alt="Theorem Logo" />
     <p style={copyrightStyle}>
       Copyright © 2019 Theorem, LLC. All Rights Reserved.
     </p>

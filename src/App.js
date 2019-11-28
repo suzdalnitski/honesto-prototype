@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 
 import LoginPage from './modules/LoginPage'
+import ShareFeedbackPage from './modules/ShareFeedbackPage'
+import Menu from './modules/Menu'
 import Footer from './modules/Footer'
 
 const style = {
@@ -16,7 +18,9 @@ const style = {
 
 const App = () => (
   <div style={style}>
-    <LoginPage />
+    <Menu />
+    <ShareFeedbackPage />
+    {/* <LoginPage /> */}
     <Footer />
   </div>
 );
