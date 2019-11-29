@@ -3,14 +3,32 @@ import PropTypes from 'prop-types';
 
 const defaultStyle = {
   borderRadius: '4px',
-  backgroundColor: '#AB61E5',
   fontSize: '16px',
-  color: '#ffffff',
-  padding: '5px'
+  padding: '5px',
 };
 
-const Button = ({style, text}) => (
-  <button style={{...defaultStyle, ...style}}>{text}</button>
+const primaryStyle = {
+  backgroundColor: '#AB61E5',
+  color: '#ffffff',
+};
+
+const secondaryStyle = {
+  backgroundColor: '#ffffff',
+  color: '#031323',
+  border: '1px solid #D9DCDE',
+  boxSizing: 'border-box',
+};
+
+const Button = ({style, text, primary, secondary}) => (
+  <button
+    style={{
+      ...defaultStyle,
+      ...(primary ? primaryStyle : {}),
+      ...(secondary ? secondaryStyle : {}),
+      ...style,
+    }}>
+    {text}
+  </button>
 );
 
 Button.defaultProps = {
@@ -20,6 +38,8 @@ Button.defaultProps = {
 Button.propTypes = {
   style: PropTypes.object,
   text: PropTypes.string.isRequired,
+  primary: PropTypes.bool,
+  secondary: PropTypes.bool,
 };
 
 export default Button;

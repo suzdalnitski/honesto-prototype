@@ -29,7 +29,7 @@ const LoginBox = () => (
   <div style={boxStyle}>
     <img src={AppIcon} alt="App Icon" />
     <p style={textStyle}> Honesto</p>
-    <Button style={buttonStyle} text="Login" />
+    <Button primary style={buttonStyle} text="Login" />
   </div>
 );
 
