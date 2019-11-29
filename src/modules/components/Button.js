@@ -19,8 +19,9 @@ const secondaryStyle = {
   boxSizing: 'border-box',
 };
 
-const Button = ({style, text, primary, secondary}) => (
+const Button = ({style, text, primary, secondary, onClick}) => (
   <button
+    onClick={onClick}
     style={{
       ...defaultStyle,
       ...(primary ? primaryStyle : {}),
@@ -40,6 +41,7 @@ Button.propTypes = {
   text: PropTypes.string.isRequired,
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 export default Button;

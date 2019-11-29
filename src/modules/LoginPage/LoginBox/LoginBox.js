@@ -1,4 +1,5 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
 
 import {Button} from 'modules/components';
 
@@ -25,12 +26,20 @@ const buttonStyle = {
   height: '50px',
 };
 
-const LoginBox = () => (
-  <div style={boxStyle}>
-    <img src={AppIcon} alt="App Icon" />
-    <p style={textStyle}> Honesto</p>
-    <Button primary style={buttonStyle} text="Login" />
-  </div>
-);
+const LoginBox = () => {
+  const history = useHistory();
+
+  const onLoginClick = () => {
+    history.push('/share-feedback');
+  };
+
+  return (
+    <div style={boxStyle}>
+      <img src={AppIcon} alt="App Icon" />
+      <p style={textStyle}>Honesto</p>
+      <Button onClick={onLoginClick} primary style={buttonStyle} text="Login" />
+    </div>
+  );
+};
 
 export default LoginBox;
