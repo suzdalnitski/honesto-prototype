@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import {useHistory} from 'react-router-dom';
+
 const defaultStyle = {
   borderRadius: '4px',
   fontSize: '16px',
@@ -19,18 +21,27 @@ const secondaryStyle = {
   boxSizing: 'border-box',
 };
 
-const Button = ({style, text, primary, secondary, onClick}) => (
-  <button
-    onClick={onClick}
-    style={{
-      ...defaultStyle,
-      ...(primary ? primaryStyle : {}),
-      ...(secondary ? secondaryStyle : {}),
-      ...style,
-    }}>
-    {text}
-  </button>
-);
+const Button = ({style, text, primary, secondary, goto, onClick}) => {
+  const history = useHistory();
+
+  const _onClick = () => {
+    goto && history.push(goto);
+    onClick && onClick();
+  };
+
+  return (
+    <button
+      onClick={_onClick}
+      style={{
+        ...defaultStyle,
+        ...(primary ? primaryStyle : {}),
+        ...(secondary ? secondaryStyle : {}),
+        ...style,
+      }}>
+      {text}
+    </button>
+  );
+};
 
 Button.defaultProps = {
   style: {},
@@ -41,6 +52,7 @@ Button.propTypes = {
   text: PropTypes.string.isRequired,
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
+  goto: PropTypes.string,
   onClick: PropTypes.func,
 };
 
