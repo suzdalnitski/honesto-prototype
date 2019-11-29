@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {useHistory} from 'react-router-dom';
 
 import cssStyle from './Tab.module.css';
 
@@ -36,21 +37,33 @@ const notificationStyle = {
   borderRadius: '50%',
 };
 
-const Tab = ({selected = false, notifications = 0, text}) => (
-  <div style={tabStyle({selected})} className={ cssStyle.tab }>
-    <div style={notificationTextStyle}>
-      <span>{text}</span>
-      {notifications > 0 && (
-        <span style={notificationStyle}>{notifications}</span>
-      )}
-    </div>
-  </div>
-);
+const Tab = ({selected = false, notifications = 0, text, goto}) => {
+  const history = useHistory();
+
+  const _onClick = () => {
+    goto && history.push(goto);
+  };
+
+  return (
+    <button
+      style={tabStyle({selected})}
+      className={cssStyle.tab}
+      onClick={_onClick}>
+      <div style={notificationTextStyle}>
+        <span>{text}</span>
+        {notifications > 0 && (
+          <span style={notificationStyle}>{notifications}</span>
+        )}
+      </div>
+    </button>
+  );
+};
 
 Tab.propTypes = {
   selected: PropTypes.bool,
   notifications: PropTypes.number,
   text: PropTypes.string.isRequired,
+  goto: PropTypes.string,
 };
 
 export default Tab;

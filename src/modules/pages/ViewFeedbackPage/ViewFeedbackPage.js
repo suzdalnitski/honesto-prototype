@@ -2,8 +2,6 @@ import React from 'react';
 
 import {Page, FeedbackPeriod} from 'modules/components';
 
-import ShareFeedbackList from './ShareFeedbackList';
-
 const pageHeaderStyle = {
   width: '100%',
   display: 'flex',
@@ -11,14 +9,13 @@ const pageHeaderStyle = {
   padding: '20px',
 };
 
-const ShareFeedbackPage = () => (
-  <Page>
+const ViewFeedbackPage = () => (
+  <Page wide>
     <div style={pageHeaderStyle}>
-      <h1 style={{fontSize: '30px'}}>Share Feedback</h1>
+      <h1 style={{fontSize: '30px'}}>My Feedback</h1>
       <FeedbackPeriod />
     </div>
-    <ShareFeedbackList />
   </Page>
 );
 
-export default ShareFeedbackPage;
+export default ViewFeedbackPage;

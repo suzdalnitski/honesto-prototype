@@ -6,7 +6,12 @@ import {
   useLocation,
 } from 'react-router-dom';
 
-import { LoginPage, ShareFeedbackPage, MultichoiceFeedbackPage } from './modules/pages';
+import {
+  LoginPage,
+  ShareFeedbackPage,
+  MultichoiceFeedbackPage,
+  ViewFeedbackPage,
+} from './modules/pages';
 import Menu from './modules/Menu';
 import Footer from './modules/Footer';
 
@@ -28,6 +33,9 @@ const Routes = () => {
         </Route>
         <Route path="/share-feedback">
           <ShareFeedbackPage />
+        </Route>
+        <Route path="/view-feedback/">
+          <ViewFeedbackPage />
         </Route>
         <Route path="/">
           <LoginPage />

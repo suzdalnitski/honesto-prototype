@@ -1,8 +1,10 @@
+Due to the limited amount of time available to work on this prototype, I've had to make some tradeoffs
+
 # Features omitted
 Logging in
+View Submission - page wasn't present in the design
 
-# Compromises made
-Due to the limited amount of time available to work on this prototype, I've had to make some compromises
+# Tradeoffs made
 
 ## Testing
 ## Performance
