@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {Button} from 'modules/components';
+
 import AppIcon from './app_icon.svg';
 
 const boxStyle = {
@@ -21,21 +23,13 @@ const textStyle = {
 const buttonStyle = {
   width: '200px',
   height: '50px',
-  borderRadius: '4px',
-  backgroundColor: '#AB61E5',
-  fontSize: '16px',
-  lineHeight: '19px',
-  fontFamily: 'inherit',
-  color: '#ffffff',
 };
-
-const LoginButton = () => <button style={buttonStyle}>Login</button>;
 
 const LoginBox = () => (
   <div style={boxStyle}>
     <img src={AppIcon} alt="App Icon" />
     <p style={textStyle}> Honesto</p>
-    <LoginButton />
+    <Button style={buttonStyle} text="Login" />
   </div>
 );
 
