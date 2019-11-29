@@ -1,0 +1,9 @@
+/* defines custom css-selectors that can't be defined with CSS-in-JS */
+
+.primary:hover {
+  background-color: #9a50d4 !important;
+}
+
+.secondary:hover {
+  background-color: #dddddd !important;
+}

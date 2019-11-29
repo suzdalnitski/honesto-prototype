@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import {useHistory} from 'react-router-dom';
+
+import cssStyles from './Button.module.css';
 
 const defaultStyle = {
   borderRadius: '4px',
@@ -37,7 +40,12 @@ const Button = ({style, text, primary, secondary, goto, onClick}) => {
         ...(primary ? primaryStyle : {}),
         ...(secondary ? secondaryStyle : {}),
         ...style,
-      }}>
+      }}
+      className={classNames({
+        [cssStyles.primary]: primary,
+        [cssStyles.secondary]: secondary,
+      })}
+    >
       {text}
     </button>
   );
