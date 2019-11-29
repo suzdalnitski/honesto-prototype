@@ -6,8 +6,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 
-import LoginPage from './modules/LoginPage';
-import ShareFeedbackPage from './modules/ShareFeedbackPage';
+import { LoginPage, ShareFeedbackPage } from './modules/pages';
 import Menu from './modules/Menu';
 import Footer from './modules/Footer';
 
