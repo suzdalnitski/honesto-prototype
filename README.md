@@ -7,3 +7,4 @@ Due to the limited amount of time available to work on this prototype, I've had 
 ## Testing
 ## Performane
 ## Styling
+## Avatar

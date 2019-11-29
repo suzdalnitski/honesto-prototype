@@ -1,6 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {Button} from 'modules/components';
+
+import {FILL_OUT, VIEW_SUBMISSION} from './itemType';
 
 const buttonStyle = {
   alignSelf: 'stretch',
@@ -9,11 +12,17 @@ const buttonStyle = {
   height: '50px',
 };
 
-const BUTTON_TYPE_FILLOUT = 'BUTTON_TYPE_FILLOUT';
-const BUTTON_TYPE_VIEW_SUBMISSION = 'BUTTON_TYPE_VIEW_SUBMISSION';
-
-const ShareFeedbackButton = () => (
-  <Button primary style={buttonStyle} text="Fill Out" />
+const ShareFeedbackButton = ({type}) => (
+  <>
+    {type === FILL_OUT && <Button primary style={buttonStyle} text="Fill Out" />}
+    {type === VIEW_SUBMISSION && (
+      <Button secondary style={buttonStyle} text="View Submission" />
+    )}
+  </>
 );
+
+ShareFeedbackButton.propTypes = {
+  type: PropTypes.oneOf([FILL_OUT, VIEW_SUBMISSION]).isRequired,
+};
 
 export default ShareFeedbackButton;

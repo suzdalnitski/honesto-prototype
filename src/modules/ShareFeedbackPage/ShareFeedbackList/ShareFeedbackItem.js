@@ -1,9 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Avatar from 'modules/Avatar';
 import {FlexSpacer} from 'modules/components';
 
 import ShareFeedbackButton from './ShareFeedbackButton';
+import {FILL_OUT, VIEW_SUBMISSION} from './itemType';
+import cssStyles from './ShareFeedbackItem.module.css';
 
 const shareFeedbackItemStyle = {
   display: 'flex',
@@ -18,13 +21,18 @@ const usernameStyle = {
   fontSize: '22px',
 };
 
-const ShareFeedbackItem = () => (
-  <div style={shareFeedbackItemStyle}>
+const ShareFeedbackItem = ({name, type}) => (
+  <div style={shareFeedbackItemStyle} className={cssStyles.item}>
     <Avatar />
-    <div style={usernameStyle}>Chris Johnson</div>
+    <div style={usernameStyle}>{name}</div>
     <FlexSpacer />
-    <ShareFeedbackButton />
+    <ShareFeedbackButton type={type} />
   </div>
 );
+
+ShareFeedbackItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  type: PropTypes.oneOf([FILL_OUT, VIEW_SUBMISSION]).isRequired,
+};
 
 export default ShareFeedbackItem;
