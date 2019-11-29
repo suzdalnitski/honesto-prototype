@@ -12,17 +12,20 @@ const buttonStyle = {
   height: '50px',
 };
 
-const ShareFeedbackButton = ({type}) => (
+const ShareFeedbackButton = ({type, goto}) => (
   <>
-    {type === FILL_OUT && <Button primary style={buttonStyle} text="Fill Out" />}
+    {type === FILL_OUT && (
+      <Button primary style={buttonStyle} text="Fill Out" goto={goto} />
+    )}
     {type === VIEW_SUBMISSION && (
-      <Button secondary style={buttonStyle} text="View Submission" />
+      <Button outline style={buttonStyle} text="View Submission" goto={goto} />
     )}
   </>
 );
 
 ShareFeedbackButton.propTypes = {
   type: PropTypes.oneOf([FILL_OUT, VIEW_SUBMISSION]).isRequired,
+  goto: PropTypes.string.isRequired,
 };
 
 export default ShareFeedbackButton;

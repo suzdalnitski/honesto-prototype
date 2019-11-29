@@ -4,6 +4,14 @@
   background-color: #9a50d4 !important;
 }
 
+.outline:hover {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.transparent:hover {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
 .secondary:hover {
-  background-color: #dddddd !important;
+  background-color: #9ba0a5 !important;
 }

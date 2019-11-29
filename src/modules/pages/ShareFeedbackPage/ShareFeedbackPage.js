@@ -1,22 +1,9 @@
 import React from 'react';
 
+import {Page} from 'modules/components';
 
 import FeedbackPeriod from './FeedbackPeriod';
 import ShareFeedbackList from './ShareFeedbackList';
-
-const menuHeight = '75px';
-const footerHeight = '54px';
-
-const pageStyle = {
-  minHeight: `calc(100vh - ${menuHeight} - ${footerHeight})`,
-  display: 'flex',
-  justifyContent: 'center',
-};
-
-const pageContentStyle = {
-  width: '800px',
-  marginTop: '30px',
-};
 
 const pageHeaderStyle = {
   width: '100%',
@@ -26,15 +13,13 @@ const pageHeaderStyle = {
 };
 
 const ShareFeedbackPage = () => (
-  <div style={pageStyle}>
-    <div style={pageContentStyle}>
-      <div style={pageHeaderStyle}>
-        <h1 style={{fontSize: '30px'}}>Share Feedback</h1>
-        <FeedbackPeriod />
-      </div>
-      <ShareFeedbackList />
+  <Page>
+    <div style={pageHeaderStyle}>
+      <h1 style={{fontSize: '30px'}}>Share Feedback</h1>
+      <FeedbackPeriod />
     </div>
-  </div>
+    <ShareFeedbackList />
+  </Page>
 );
 
 export default ShareFeedbackPage;

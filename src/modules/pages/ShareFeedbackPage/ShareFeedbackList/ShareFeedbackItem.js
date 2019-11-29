@@ -21,16 +21,17 @@ const usernameStyle = {
   fontSize: '22px',
 };
 
-const ShareFeedbackItem = ({name, type}) => (
+const ShareFeedbackItem = ({userid, name, type}) => (
   <div style={shareFeedbackItemStyle} className={cssStyles.item}>
     <Avatar />
     <div style={usernameStyle}>{name}</div>
     <FlexSpacer />
-    <ShareFeedbackButton type={type} />
+    <ShareFeedbackButton type={type} goto={`/share-feedback/${userid}`} />
   </div>
 );
 
 ShareFeedbackItem.propTypes = {
+  userid: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   type: PropTypes.oneOf([FILL_OUT, VIEW_SUBMISSION]).isRequired,
 };

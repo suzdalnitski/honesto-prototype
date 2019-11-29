@@ -9,6 +9,7 @@ import cssStyles from './Button.module.css';
 const defaultStyle = {
   borderRadius: '4px',
   fontSize: '16px',
+  fontWeight: '600',
   padding: '5px',
 };
 
@@ -17,14 +18,33 @@ const primaryStyle = {
   color: '#ffffff',
 };
 
-const secondaryStyle = {
-  backgroundColor: '#ffffff',
+const outlineStyle = {
+  backgroundColor: 'transparent',
   color: '#031323',
   border: '1px solid #D9DCDE',
   boxSizing: 'border-box',
 };
 
-const Button = ({style, text, primary, secondary, goto, onClick}) => {
+const transparentStyle = {
+  backgroundColor: 'transparent',
+  color: '#031323',
+};
+
+const secondaryStyle = {
+  backgroundColor: '#ACB1B6',
+  color: '#ffffff',
+};
+
+const Button = ({
+  style,
+  text,
+  primary,
+  outline,
+  secondary,
+  transparent,
+  goto,
+  onClick,
+}) => {
   const history = useHistory();
 
   const _onClick = () => {
@@ -38,14 +58,17 @@ const Button = ({style, text, primary, secondary, goto, onClick}) => {
       style={{
         ...defaultStyle,
         ...(primary ? primaryStyle : {}),
+        ...(outline ? outlineStyle : {}),
         ...(secondary ? secondaryStyle : {}),
+        ...(transparent ? transparentStyle : {}),
         ...style,
       }}
       className={classNames({
         [cssStyles.primary]: primary,
+        [cssStyles.outline]: outline,
         [cssStyles.secondary]: secondary,
-      })}
-    >
+        [cssStyles.transparent]: transparent,
+      })}>
       {text}
     </button>
   );
@@ -59,7 +82,9 @@ Button.propTypes = {
   style: PropTypes.object,
   text: PropTypes.string.isRequired,
   primary: PropTypes.bool,
+  outline: PropTypes.bool,
   secondary: PropTypes.bool,
+  transparent: PropTypes.bool,
   goto: PropTypes.string,
   onClick: PropTypes.func,
 };
