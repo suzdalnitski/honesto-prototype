@@ -8,7 +8,7 @@ const menuStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-around',
-  width: '90vh',
+  width: '90vw',
   height: '75px',
   color: '#031323',
 };

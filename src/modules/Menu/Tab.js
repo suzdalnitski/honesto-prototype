@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import cssStyle from './Tab.module.css';
+
 const tabStyle = ({selected}) => ({
   display: 'flex',
   alignItems: 'center',
   fontSize: '16px',
+  fontWeight: 600,
   height: '100%',
+  padding: '25px',
   ...(selected
     ? {
         borderBottom: '3px solid #ab61e5',
@@ -33,7 +37,7 @@ const notificationStyle = {
 };
 
 const Tab = ({selected = false, notifications = 0, text}) => (
-  <div style={tabStyle({selected})}>
+  <div style={tabStyle({selected})} className={ cssStyle.tab }>
     <div style={notificationTextStyle}>
       <span>{text}</span>
       {notifications > 0 && (

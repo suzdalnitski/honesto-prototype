@@ -16,7 +16,8 @@ const nextFeedbackTextStyle = {
 };
 
 const daysTextStyle = {
-  color: '#17bea0'
+  color: '#17bea0',
+  fontWeight: 600
 };
 
 const NextFeedbackCycle = () => (
@@ -24,7 +25,7 @@ const NextFeedbackCycle = () => (
     <div style={textDivStyle}>
       <div style={nextFeedbackTextStyle}>Next Feedback Cycle:</div>
       <div>
-        Sept 2018 -<span style={daysTextStyle}>4 days</span>
+        Sept 2018 - <span style={daysTextStyle}>4 days</span>
       </div>
     </div>
   </div>

@@ -1,0 +1,5 @@
+/* defines custom css-selectors that can't be defined with CSS-in-JS */
+
+.tab:hover {
+  background-color: #dddddd;
+}
