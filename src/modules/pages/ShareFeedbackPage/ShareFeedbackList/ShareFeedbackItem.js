@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Avatar from 'modules/Avatar';
-import {FlexSpacer} from 'modules/components';
+import {Avatar, FlexSpacer} from 'modules/components';
 
 import ShareFeedbackButton from './ShareFeedbackButton';
 import {FILL_OUT, VIEW_SUBMISSION} from './itemType';

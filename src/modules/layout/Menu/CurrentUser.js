@@ -1,26 +1,26 @@
 import React from 'react';
 
-import Avatar from 'modules/Avatar';
+import {Avatar} from 'modules/components';
 
 const currentUserStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-around',
-}
+};
 
 const textBlockStyle = {
-  marginLeft: '15px'
-}
+  marginLeft: '15px',
+};
 
 const nameStyle = {
   fontSize: '16px',
-  color: '#031323'
-}
+  color: '#031323',
+};
 
 const logoutStyle = {
   fontSize: '12px',
-  color: '#59636E'
-}
+  color: '#59636E',
+};
 
 const CurrentUser = () => (
   <div style={currentUserStyle}>

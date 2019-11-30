@@ -11,9 +11,8 @@ import {
   ShareFeedbackPage,
   MultichoiceFeedbackPage,
   ViewFeedbackPage,
-} from './modules/pages';
-import Menu from './modules/Menu';
-import Footer from './modules/Footer';
+} from 'modules/pages';
+import { Menu, Footer } from 'modules/layout';
 
 const style = {
   width: '100vw',

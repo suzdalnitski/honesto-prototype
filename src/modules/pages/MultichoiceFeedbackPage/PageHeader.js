@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Avatar from 'modules/Avatar';
+import { Avatar } from 'modules/components';
 
 const pageHeaderStyle = {
   width: '100%',

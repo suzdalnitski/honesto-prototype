@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {Page, FeedbackPeriod} from 'modules/components';
+import {FeedbackPeriod} from 'modules/components';
+import {Page} from 'modules/layout';
 
 const pageHeaderStyle = {
   width: '100%',

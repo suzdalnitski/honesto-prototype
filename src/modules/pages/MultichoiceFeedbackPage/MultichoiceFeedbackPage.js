@@ -2,7 +2,8 @@ import React from 'react';
 
 import {useParams} from 'react-router-dom';
 
-import {Page, Button} from 'modules/components';
+import {Button} from 'modules/components';
+import {Page} from 'modules/layout';
 
 import PageHeader from './PageHeader';
 import BackButton from './BackButton';
