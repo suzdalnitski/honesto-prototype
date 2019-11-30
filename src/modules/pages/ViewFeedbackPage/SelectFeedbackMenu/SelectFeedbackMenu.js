@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import SelectFeedbackMenuItem from './SelectFeedbackMenuItem';
 
@@ -14,20 +15,24 @@ const feedbackReceivedTextStyle = {
   margin: '10px',
 };
 
-const users = [
-  {id: 0, name: 'Sarah Johnson', active: true},
-  {id: 1, name: 'Samantha Parker', active: false},
-  {id: 2, name: 'Elizabeth Baker', active: false},
-  {id: 3, name: 'Mary Macleod', active: false},
-];
-
-const SelectFeedbackMenu = () => (
+const SelectFeedbackMenu = ({users, selectedUser, onSelect}) => (
   <div style={menuStyle}>
     <div style={feedbackReceivedTextStyle}>FEEDBACK RECEIVED</div>
-    {users.map(({id, name, active}) => (
-      <SelectFeedbackMenuItem key={id} name={name} active={active} />
+    {users.map(({id, name}) => (
+      <SelectFeedbackMenuItem
+        key={id}
+        name={name}
+        selected={selectedUser === id}
+        onClick={() => onSelect(id)}
+      />
     ))}
   </div>
 );
+
+SelectFeedbackMenu.propTypes = {
+  users: PropTypes.array.isRequired,
+  selectedUser: PropTypes.number,
+  onSelect: PropTypes.func.isRequired,
+};
 
 export default SelectFeedbackMenu;

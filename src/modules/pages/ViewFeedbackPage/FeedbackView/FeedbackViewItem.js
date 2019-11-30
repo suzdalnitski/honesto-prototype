@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 
+import {
+  MULTICHOICE_QUESTION,
+  RATING_AND_TEXT_QUESTION,
+  TEXT_ONLY_QUESTION,
+} from 'modules/store';
+
 import RatingScale from './RatingScale';
 
 const itemStyle = {
@@ -11,14 +17,14 @@ const itemStyle = {
 
 const tooltipId = id => `tooltip-${id}`;
 
-const FreeformItem = ({question, answer}) => (
+const TextOnlyItem = ({question, answer}) => (
   <div>
     <div>{question}</div>
     <p>{answer}</p>
   </div>
 );
 
-FreeformItem.propTypes = {
+TextOnlyItem.propTypes = {
   question: PropTypes.string.isRequired,
   answer: PropTypes.string,
 };
@@ -43,13 +49,10 @@ RatingScaleItem.propTypes = {
   scale: PropTypes.number.isRequired,
 };
 
-const FREEFORM = 'freeform';
-const RATING_SCALE = 'rating-scale';
-
 const FeedbackViewItem = ({id, type, question, answer, rating, scale}) => (
   <div style={itemStyle}>
-    {type === FREEFORM ? (
-      <FreeformItem question={question} answer={answer} />
+    {type === TEXT_ONLY_QUESTION ? (
+      <TextOnlyItem question={question} answer={answer} />
     ) : (
       <RatingScaleItem
         id={id}
@@ -64,7 +67,11 @@ const FeedbackViewItem = ({id, type, question, answer, rating, scale}) => (
 
 FeedbackViewItem.propTypes = {
   id: PropTypes.number.isRequired,
-  type: PropTypes.oneOf([FREEFORM, RATING_SCALE]).isRequired,
+  type: PropTypes.oneOf([
+    MULTICHOICE_QUESTION,
+    RATING_AND_TEXT_QUESTION,
+    TEXT_ONLY_QUESTION,
+  ]).isRequired,
   question: PropTypes.string.isRequired,
   answer: PropTypes.string,
   rating: PropTypes.number,

@@ -20,12 +20,13 @@ const textStyle = {
   marginLeft: '15px',
 };
 
-const SelectFeedbackMenuItem = ({name, active}) => (
+const SelectFeedbackMenuItem = ({name, selected, onClick}) => (
   <div
+    onClick={onClick}
     style={itemStyle}
     className={classNames({
       [cssStyles.item]: true,
-      [cssStyles.itemActive]: active,
+      [cssStyles.itemActive]: selected,
     })}>
     <Avatar />
     <div style={textStyle}>{name}</div>
@@ -33,8 +34,9 @@ const SelectFeedbackMenuItem = ({name, active}) => (
 );
 
 SelectFeedbackMenuItem.propTypes = {
+  onClick: PropTypes.func,
   name: PropTypes.string.isRequired,
-  active: PropTypes.bool,
+  selected: PropTypes.bool,
 };
 
 export default SelectFeedbackMenuItem;

@@ -1,6 +1,9 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import orderBy from 'lodash/orderBy';
+import {useSelector} from 'react-redux';
+
+import {selectFeedbackForUser} from 'modules/store';
 
 import FeedbackViewItem from './FeedbackViewItem';
 
@@ -73,25 +76,39 @@ const feedbackList = [
 
 // ensures that freeform text is rendered at the end
 const orderFeedbackList = feedbackList =>
-  orderBy(feedbackList, ['type'], ['desc']);
+  orderBy(feedbackList, ['type'], ['asc']);
 
-const FeedbackView = () => (
-  <div style={feedbackViewStyle}>
-    <h1 style={headerTextStyle}>John Smith's Feedback</h1>
-    {orderFeedbackList(feedbackList).map(
-      ({id, type, question, answer, rating, scale}) => (
-        <FeedbackViewItem
-          key={id}
-          id={id}
-          type={type}
-          question={question}
-          answer={answer}
-          rating={rating}
-          scale={scale}
-        />
-      ),
-    )}
-  </div>
-);
+const FeedbackView = ({username, fromUser, toUser}) => {
+  const feedbackList = useSelector(state =>
+    selectFeedbackForUser(state)({fromUser, toUser}),
+  );
+
+  console.log(feedbackList);
+
+  return (
+    <div style={feedbackViewStyle}>
+      <h1 style={headerTextStyle}>{username}'s Feedback</h1>
+      {orderFeedbackList(feedbackList).map(
+        ({type, question, answer, answerText, rating, scale}, index) => (
+          <FeedbackViewItem
+            key={index}
+            id={index}
+            type={type}
+            question={question.text}
+            answer={answerText || answer.text}
+            rating={rating || answer && answer.rating}
+            scale={scale}
+          />
+        ),
+      )}
+    </div>
+  );
+};
+
+FeedbackView.propTypes = {
+  username: PropTypes.string.isRequired,
+  fromUser: PropTypes.number.isRequired,
+  toUser: PropTypes.number.isRequired,
+};
 
 export default FeedbackView;

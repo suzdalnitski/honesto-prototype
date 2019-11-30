@@ -6,28 +6,28 @@ import values from 'lodash/values';
 
 import {normalizeById} from './util';
 
-const MULTICHOICE = 'MULTICHOICE';
-const RATING_AND_TEXT = 'RATING_AND_TEXT';
-const TEXT_ONLY = 'TEXT_ONLY';
+export const MULTICHOICE_QUESTION = 'MULTICHOICE_QUESTION';
+export const RATING_AND_TEXT_QUESTION = 'RATING_AND_TEXT_QUESTION';
+export const TEXT_ONLY_QUESTION = 'TEXT_ONLY_QUESTION';
 
 const multiChoiceQuestions = [
   {
     id: 0,
-    type: MULTICHOICE,
+    type: MULTICHOICE_QUESTION,
     text: 'How well did this person display courage?',
     // refers to the answers in the answers.js duck
     answerOptions: [0, 1, 2],
   },
   {
     id: 1,
-    type: MULTICHOICE,
+    type: MULTICHOICE_QUESTION,
     text: "How would you rate the quality of this person's code?",
     // refers to the answers in the answers.js duck
     answerOptions: [3, 4, 5],
   },
   {
     id: 2,
-    type: MULTICHOICE,
+    type: MULTICHOICE_QUESTION,
     text: 'How reliable is this person?',
     // refers to the answers in the answers.js duck
     answerOptions: [6, 7, 8],
@@ -37,17 +37,17 @@ const multiChoiceQuestions = [
 const ratingAndTextQuestions = [
   {
     id: 3,
-    type: RATING_AND_TEXT,
+    type: RATING_AND_TEXT_QUESTION,
     text: 'How well does this person handle stress?',
   },
   {
     id: 4,
-    type: RATING_AND_TEXT,
+    type: RATING_AND_TEXT_QUESTION,
     text: 'Can you count on this person in a difficult situation?',
   },
   {
     id: 5,
-    type: RATING_AND_TEXT,
+    type: RATING_AND_TEXT_QUESTION,
     text: 'How well does this person interact with clients?',
   },
 ];
@@ -55,7 +55,7 @@ const ratingAndTextQuestions = [
 const textOnlyQuestions = [
   {
     id: 10000,
-    type: TEXT_ONLY,
+    type: TEXT_ONLY_QUESTION,
     text: 'Do you have any other feedback for this person?',
   },
 ];
