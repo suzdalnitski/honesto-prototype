@@ -23,7 +23,7 @@ const honestoTextStyle = {
 const Menu = () => {
   const location = useLocation();
 
-  const isPath = pathname => location.pathname === pathname;
+  const isPath = pathname => location.pathname.includes(pathname);
 
   return (
     <div style={menuStyle}>

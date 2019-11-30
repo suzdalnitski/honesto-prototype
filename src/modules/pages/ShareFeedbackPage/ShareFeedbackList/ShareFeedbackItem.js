@@ -25,7 +25,11 @@ const ShareFeedbackItem = ({userid, name, type}) => (
     <Avatar />
     <div style={usernameStyle}>{name}</div>
     <FlexSpacer />
-    <ShareFeedbackButton type={type} goto={`/share-feedback/${userid}`} />
+    {type === FILL_OUT ? (
+      <ShareFeedbackButton type={type} goto={`/share-feedback/${userid}`} />
+    ) : (
+      <ShareFeedbackButton type={type} />
+    )}
   </div>
 );
 

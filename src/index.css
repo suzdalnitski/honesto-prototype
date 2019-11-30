@@ -5,7 +5,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
-  color: #031323;
 }
 
 button {
@@ -16,4 +15,8 @@ button {
   font: inherit;
   cursor: pointer;
   outline: inherit;
+}
+
+html {
+  color: #031323;
 }

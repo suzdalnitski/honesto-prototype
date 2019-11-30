@@ -25,7 +25,7 @@ const ShareFeedbackButton = ({type, goto}) => (
 
 ShareFeedbackButton.propTypes = {
   type: PropTypes.oneOf([FILL_OUT, VIEW_SUBMISSION]).isRequired,
-  goto: PropTypes.string.isRequired,
+  goto: PropTypes.string,
 };
 
 export default ShareFeedbackButton;
