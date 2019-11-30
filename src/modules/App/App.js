@@ -10,7 +10,7 @@ import { Provider } from 'react-redux'
 import {
   LoginPage,
   ShareFeedbackPage,
-  MultichoiceFeedbackPage,
+  SubmitFeedbackPage,
   ViewFeedbackPage,
 } from 'modules/pages';
 import { Menu, Footer } from 'modules/layout';
@@ -29,11 +29,11 @@ const Routes = () => {
     <>
       {shouldShowMenu({location}) && <Menu />}
       <Switch>
-        <Route path="/share-feedback/:userid">
-          <MultichoiceFeedbackPage />
-        </Route>
         <Route path="/share-feedback">
           <ShareFeedbackPage />
+        </Route>
+        <Route path="/submit-feedback/:userid">
+          <SubmitFeedbackPage />
         </Route>
         <Route path="/view-feedback/">
           <ViewFeedbackPage />

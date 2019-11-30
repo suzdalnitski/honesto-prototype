@@ -1,3 +1,7 @@
 .option:hover {
   background-color: #e1e2e3 !important;
 }
+
+.selected {
+  background-color: #e1e2e3 !important;
+}

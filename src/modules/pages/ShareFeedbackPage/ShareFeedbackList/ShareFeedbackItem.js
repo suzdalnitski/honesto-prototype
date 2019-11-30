@@ -26,7 +26,7 @@ const ShareFeedbackItem = ({userid, name, type}) => (
     <div style={usernameStyle}>{name}</div>
     <FlexSpacer />
     {type === FILL_OUT ? (
-      <ShareFeedbackButton type={type} goto={`/share-feedback/${userid}`} />
+      <ShareFeedbackButton type={type} goto={`/submit-feedback/${userid}`} />
     ) : (
       <ShareFeedbackButton type={type} />
     )}

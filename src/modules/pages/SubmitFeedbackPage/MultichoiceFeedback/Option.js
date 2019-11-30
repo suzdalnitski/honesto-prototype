@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import classNames from 'classnames';
+
 import cssStyles from './Option.module.css';
 
 const optionStyle = {
@@ -10,8 +12,14 @@ const optionStyle = {
   marginTop: '10px',
 };
 
-const Option = ({title, children}) => (
-  <div style={optionStyle} className={cssStyles.option}>
+const Option = ({title, children, selected, onClick}) => (
+  <div
+    onClick={onClick}
+    style={optionStyle}
+    className={classNames({
+      [cssStyles.option]: true,
+      [cssStyles.selected]: selected,
+    })}>
     <div>{title}</div>
     <div>{children}</div>
   </div>
@@ -20,6 +28,8 @@ const Option = ({title, children}) => (
 Option.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.string.isRequired,
+  selected: PropTypes.bool,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default Option;
