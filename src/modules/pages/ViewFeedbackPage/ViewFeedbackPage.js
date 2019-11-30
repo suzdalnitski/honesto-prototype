@@ -29,7 +29,6 @@ const ViewFeedbackPage = () => {
           onSelect={id => setSelected(id)}
         />
         <FeedbackView
-          username={meUser.name}
           fromUser={selectedUser}
           toUser={meUser.id}
         />
