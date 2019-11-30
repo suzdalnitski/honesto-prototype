@@ -19,6 +19,15 @@ const multichoiceFeedbackToMe = (fromUser, questionId, answerId) => ({
   scale: 3,
 });
 
+const multichoiceFeedbackByMe = (toUser, questionId, answerId) => ({
+  fromUser: 0,
+  toUser,
+  questionId,
+  answerId,
+  type: MULTICHOICE_QUESTION,
+  scale: 3,
+});
+
 const feedbackGivenToMe = [
   // MULTICHOICE
   multichoiceFeedbackToMe(1, 0, 1),
@@ -112,7 +121,56 @@ const feedbackGivenToMe = [
   },
 ];
 
-const initialState = feedbackGivenToMe;
+const feedbackGivenByMe = [
+  // MULTICHOICE
+  multichoiceFeedbackByMe(1, 0, 1),
+  multichoiceFeedbackToMe(1, 1, 3),
+  multichoiceFeedbackToMe(1, 2, 8),
+
+  // RATING_AND_TEXT
+  {
+    toUser: 1,
+    fromUser: 0,
+    questionId: 3,
+    answerText:
+      'Very well! Elit ullam autem delectus autem officiis odio Voluptatibus ut nobis.',
+    rating: 9,
+    scale: 10,
+    type: RATING_AND_TEXT_QUESTION,
+  },
+  {
+    toUser: 1,
+    fromUser: 0,
+    questionId: 4,
+    answerText:
+      'I can always count on this person. Adipisicing sit repellat consectetur accusantium quo. Praesentium expedita totam officia ab fugiat. Non omnis impedit.',
+    rating: 7,
+    scale: 10,
+    type: RATING_AND_TEXT_QUESTION,
+  },
+  {
+    toUser: 1,
+    fromUser: 0,
+    questionId: 5,
+    answerText:
+      'Lorem ab suscipit impedit alias omnis Ullam aliquam esse unde ullam modi? Eius obcaecati eius',
+    rating: 7,
+    scale: 10,
+    type: RATING_AND_TEXT_QUESTION,
+  },
+
+  // TEXT_ONLY
+  {
+    toUser: 1,
+    fromUser: 0,
+    questionId: 10000,
+    answerText:
+      'Keep up the good work! Lorem illo vero ut possimus odio Beatae ratione vel delectus perspiciatis dolorem maiores nulla incidunt, dolore? Debitis eligendi quia ratione vel odio? Veritatis commodi odit totam culpa sapiente ipsum quas.',
+    type: TEXT_ONLY_QUESTION,
+  },
+];
+
+const initialState = [...feedbackGivenToMe, ...feedbackGivenByMe];
 
 export const reducer = (state = initialState) => state;
 

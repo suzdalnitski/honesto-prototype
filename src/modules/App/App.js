@@ -35,7 +35,7 @@ const Routes = () => {
         <Route path="/submit-feedback/:userid">
           <SubmitFeedbackPage />
         </Route>
-        <Route path="/view-feedback/">
+        <Route path="/view-feedback/:type">
           <ViewFeedbackPage />
         </Route>
         <Route path="/">
