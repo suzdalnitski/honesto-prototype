@@ -17,12 +17,12 @@ const copyrightStyle = {
 };
 
 const Footer = () => (
-  <div style={footerStyle}>
+  <footer style={footerStyle}>
     <img src={TheoremLogo} alt="Theorem Logo" />
     <p style={copyrightStyle}>
       Copyright © 2019 Theorem, LLC. All Rights Reserved.
     </p>
-  </div>
+  </footer>
 );
 
 export default Footer;

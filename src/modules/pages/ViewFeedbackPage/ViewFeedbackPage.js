@@ -1,20 +1,22 @@
 import React from 'react';
 
-import {FeedbackPeriod} from 'modules/components';
 import {Page} from 'modules/layout';
 
-const pageHeaderStyle = {
-  width: '100%',
+import PageHeader from './PageHeader';
+import FeedbackView from './FeedbackView';
+import SelectFeedbackMenu from './SelectFeedbackMenu';
+
+const pageContentStyle = {
   display: 'flex',
-  justifyContent: 'space-between',
-  padding: '20px',
+  width: '100%',
 };
 
 const ViewFeedbackPage = () => (
   <Page wide>
-    <div style={pageHeaderStyle}>
-      <h1 style={{fontSize: '30px'}}>My Feedback</h1>
-      <FeedbackPeriod />
+    <PageHeader />
+    <div style={pageContentStyle}>
+      <SelectFeedbackMenu />
+      <FeedbackView />
     </div>
   </Page>
 );

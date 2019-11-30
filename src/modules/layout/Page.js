@@ -20,13 +20,15 @@ const pageContentStyle = {
 };
 
 const Page = ({children, wide}) => (
-  <div style={{...pageStyle, ...(wide ? {width: '1200px'} : {})}}>
-    <div style={pageContentStyle}>{children}</div>
-  </div>
+  <main style={pageStyle}>
+    <div style={{...pageContentStyle, ...(wide ? {width: '1200px'} : {})}}>
+      {children}
+    </div>
+  </main>
 );
 
 Page.propTypes = {
-  wide: PropTypes.bool
-}
+  wide: PropTypes.bool,
+};
 
 export default Page;

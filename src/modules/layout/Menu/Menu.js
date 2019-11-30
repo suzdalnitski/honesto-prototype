@@ -26,7 +26,7 @@ const Menu = () => {
   const isPath = pathname => location.pathname.includes(pathname);
 
   return (
-    <div style={menuStyle}>
+    <nav style={menuStyle}>
       <h2 style={honestoTextStyle}>Honesto</h2>
       <Tab
         text="Share Feedback"
@@ -48,7 +48,7 @@ const Menu = () => {
       <Tab text="Teams" />
       <NextFeedbackCycle />
       <CurrentUser />
-    </div>
+    </nav>
   );
 };
 

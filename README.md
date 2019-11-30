@@ -2,7 +2,9 @@ Due to the limited amount of time available to work on this prototype, I've had 
 
 # Features omitted
 Logging in
-View Submission - page wasn't present in the design
+View Submission - non-essential because the data can be viewed on the "team feedback" page
+Skipping feedback
+Notification count is non-functional
 
 # Tradeoffs made
 

@@ -1,0 +1,9 @@
+.item:hover {
+  background-color: #dddddd;
+  color: #031323 !important;
+}
+
+.itemActive {
+  background-color: #dddddd;
+  color: #031323 !important;
+}
