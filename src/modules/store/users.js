@@ -19,3 +19,4 @@ const selectAllUsers = state => values(state.users);
 
 export const selectNotMeUsers = state => selectAllUsers(state).filter(user => !user.isMe);
 export const selectMeUser = state => selectAllUsers(state).filter(user => user.isMe)[0];
+export const selectUser = state => id => state.users[id];

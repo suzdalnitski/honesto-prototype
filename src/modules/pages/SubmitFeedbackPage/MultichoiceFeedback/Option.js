@@ -12,7 +12,7 @@ const optionStyle = {
   marginTop: '10px',
 };
 
-const Option = ({title, children, selected, onClick}) => (
+const Option = ({title, text, selected, onClick}) => (
   <div
     onClick={onClick}
     style={optionStyle}
@@ -21,13 +21,13 @@ const Option = ({title, children, selected, onClick}) => (
       [cssStyles.selected]: selected,
     })}>
     <div>{title}</div>
-    <div>{children}</div>
+    <div>{text}</div>
   </div>
 );
 
 Option.propTypes = {
   title: PropTypes.string.isRequired,
-  children: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
   selected: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
 };

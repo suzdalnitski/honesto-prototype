@@ -1,27 +1,41 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {pipe, map} from 'lodash/fp';
+
+import {selectQuestionAnswerIds, selectAnswer} from 'modules/store';
 
 import Option from './Option';
 
-const MultichoiceFeedback = () => { 
+const MultichoiceFeedback = ({answers}) => {
   const [selection, setSelection] = useState(-1);
-  
-  return (
-  <div>
-    <Option title="Please Improve">
-      You may have done one or the following: Maybe you were mostly quiet in
-      meetings and when you had something on your mind, you brought it to the
-      team afterward. Or, you had feedback that would be valuable to go, but you
-      found it too difficult. Or, you had an opportunity to grow by doing
-      something uncomfortable but you didn't.
-    </Option>
-    <Option title="You Were Good">
-      You sometimes participate in meetings but you feel that they don’t always
-      bring up important things when they should.
-    </Option>
-    <Option title="You Were Great">
-      I and others can count on your courage to help the team do what is right.
-    </Option>
-  </div>
-); }
 
-export default MultichoiceFeedback;
+  return (
+    <div>
+      {answers.map(({id, text, title}) => (
+        // In production I would memoize the onClick event handler
+        <Option
+          key={id}
+          title={title}
+          text={text}
+          selected={selection === id}
+          onClick={() => setSelection(id)}
+        />
+      ))}
+    </div>
+  );
+};
+
+MultichoiceFeedback.propTypes = {
+  answers: PropTypes.array.isRequired,
+  questionId: PropTypes.number.isRequired,
+};
+
+const mapStateToProps = (state, {questionId}) => ({
+  answers: pipe(
+    selectQuestionAnswerIds(state),
+    map(selectAnswer(state)),
+  )(questionId),
+});
+
+export default connect(mapStateToProps)(MultichoiceFeedback);

@@ -87,4 +87,4 @@ const initialState = normalizeById(answers);
 
 export const reducer = (state = initialState, _action) => state;
 
-export const selectAnswer = state => ({id}) => state.optionAnswers[id];
+export const selectAnswer = state => (id) => state.answers[id];

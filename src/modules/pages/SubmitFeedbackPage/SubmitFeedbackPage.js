@@ -1,9 +1,10 @@
 import React from 'react';
-
 import {useParams} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 
 import {Button} from 'modules/components';
 import {Page} from 'modules/layout';
+import {selectUser, selectQuestion} from 'modules/store';
 
 import PageHeader from './PageHeader';
 import BackButton from './BackButton';
@@ -38,16 +39,21 @@ const Buttons = () => (
 
 const MultichoiceFeedbackPage = () => {
   const {userid} = useParams();
+  const user = useSelector(state => selectUser(state)(userid));
+
+  const questionId = 0;
+
+  const question = useSelector(state => selectQuestion(state)(questionId));
 
   return (
     <Page>
       <BackButton />
       <PageHeader
-        username="Sarah Johnson"
-        question="How well did I display courage?"
+        username={user.name}
+        question={question.text}
       />
       <div style={boxStyle}>
-        <MultichoiceFeedback />
+        <MultichoiceFeedback questionId={questionId} />
         <Buttons />
         <Progress completed={5} outOf={17} />
       </div>
