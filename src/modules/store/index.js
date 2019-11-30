@@ -9,4 +9,4 @@ export {
   TEXT_ONLY_QUESTION,
 } from './questions';
 export {selectAnswer} from './answers';
-export {selectFeedbackForUser} from './feedback.js';
+export {selectFeedbackForUser, selectIsAllFeedbackComplete} from './feedback.js';

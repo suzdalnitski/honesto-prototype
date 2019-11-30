@@ -4,24 +4,17 @@
 
 import {
   selectQuestion,
+  selectAllQuestions,
   MULTICHOICE_QUESTION,
   RATING_AND_TEXT_QUESTION,
   TEXT_ONLY_QUESTION,
 } from './questions';
 import {selectAnswer} from './answers';
+import {selectNotMeUsers, selectMeUser} from './users';
 
 const multichoiceFeedbackToMe = (fromUser, questionId, answerId) => ({
   toUser: 0,
   fromUser,
-  questionId,
-  answerId,
-  type: MULTICHOICE_QUESTION,
-  scale: 3,
-});
-
-const multichoiceFeedbackByMe = (toUser, questionId, answerId) => ({
-  fromUser: 0,
-  toUser,
   questionId,
   answerId,
   type: MULTICHOICE_QUESTION,
@@ -121,11 +114,20 @@ const feedbackGivenToMe = [
   },
 ];
 
+const multichoiceFeedbackByMe = (toUser, questionId, answerId) => ({
+  fromUser: 0,
+  toUser,
+  questionId,
+  answerId,
+  type: MULTICHOICE_QUESTION,
+  scale: 3,
+});
+
 const feedbackGivenByMe = [
   // MULTICHOICE
   multichoiceFeedbackByMe(1, 0, 1),
-  multichoiceFeedbackToMe(1, 1, 3),
-  multichoiceFeedbackToMe(1, 2, 8),
+  multichoiceFeedbackByMe(1, 1, 3),
+  multichoiceFeedbackByMe(1, 2, 8),
 
   // RATING_AND_TEXT
   {
@@ -186,4 +188,34 @@ export const selectFeedbackForUser = state => ({fromUser, toUser}) => {
   }));
 
   return feedbackWithQuestion;
+};
+
+// selects a map telling whether or not ME has completed all feedback for another user
+export const selectIsAllFeedbackComplete = state => {
+  const meUser = selectMeUser(state);
+  const notMeUsers = selectNotMeUsers(state);
+
+  const isAllFeedbackCompleteArray = notMeUsers.map(notMe => {
+    const feedbackForNotMe = selectFeedbackForUser(state)({
+      fromUser: meUser.id,
+      toUser: notMe.id,
+    });
+
+    const allQuestions = selectAllQuestions(state);
+
+    return {
+      id: notMe.id,
+      value: feedbackForNotMe.length >= allQuestions.length,
+    };
+  });
+
+  const isAllFeedbackCompleteMap = isAllFeedbackCompleteArray.reduce(
+    (acc, val) => ({
+      ...acc,
+      [val.id]: val.value,
+    }),
+    {},
+  );
+
+  return isAllFeedbackCompleteMap;
 };

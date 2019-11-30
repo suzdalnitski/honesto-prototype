@@ -28,7 +28,7 @@ const ViewFeedbackPage = () => {
 
   return (
     <Page wide>
-      <PageHeader />
+      <PageHeader title={pageType === 'my' ? 'My Feedback' : 'Team Feedback'} />
       <div style={pageContentStyle}>
         <SelectFeedbackMenu
           users={notMeUsers}
