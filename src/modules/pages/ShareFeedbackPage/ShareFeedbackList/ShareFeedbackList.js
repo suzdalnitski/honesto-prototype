@@ -1,14 +1,33 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+
+import {selectNotMeUsers} from 'modules/store';
 
 import ShareFeedbackItem from './ShareFeedbackItem';
 
-const ShareFeedbackList = () => (
+const getFeedbackItemType = ({feedbackSubmitted}) =>
+  feedbackSubmitted ? 'view-submission' : 'fill-out';
+
+const ShareFeedbackList = ({users}) => (
   <div>
-    <ShareFeedbackItem userid={0} name="Sarah Johnson" type="fill-out" />
-    <ShareFeedbackItem userid={1} name="Samantha Parker" type="view-submission" />
-    <ShareFeedbackItem userid={2} name="Elizabeth Baker" type="view-submission" />
-    <ShareFeedbackItem userid={3} name="Mary Macleod" type="view-submission" />
+    {users.map(({id, name, feedbackSubmitted}) => (
+      <ShareFeedbackItem
+        key={id}
+        userid={id}
+        name={name}
+        type={getFeedbackItemType({feedbackSubmitted})}
+      />
+    ))}
   </div>
 );
 
-export default ShareFeedbackList;
+ShareFeedbackList.propTypes = {
+  users: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = state => ({
+  users: selectNotMeUsers(state),
+});
+
+export default connect(mapStateToProps)(ShareFeedbackList);

@@ -5,6 +5,7 @@ import {
   Route,
   useLocation,
 } from 'react-router-dom';
+import { Provider } from 'react-redux'
 
 import {
   LoginPage,
@@ -13,6 +14,7 @@ import {
   ViewFeedbackPage,
 } from 'modules/pages';
 import { Menu, Footer } from 'modules/layout';
+import setupStore from 'modules/store';
 
 const style = {
   width: '100vw',
@@ -44,13 +46,17 @@ const Routes = () => {
   );
 };
 
+const store = setupStore();
+
 const App = () => (
-  <div style={style}>
-    <Router>
-      <Routes />
-    </Router>
-    <Footer />
-  </div>
+  <Provider store={store}>
+    <div style={style}>
+      <Router>
+        <Routes />
+      </Router>
+      <Footer />
+    </div>
+  </Provider>
 );
 
 export default App;
