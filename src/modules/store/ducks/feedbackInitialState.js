@@ -1,6 +1,6 @@
 import {
   MULTICHOICE_QUESTION,
-  RATING_AND_TEXT_QUESTION,
+  SCALE_QUESTION,
   TEXT_ONLY_QUESTION,
 } from './questions';
 
@@ -27,56 +27,46 @@ const feedbackGivenToMe = [
   multichoiceFeedbackToMe(3, 1, 4),
   multichoiceFeedbackToMe(3, 2, 6),
 
-  // RATING_AND_TEXT
+  // SCALE_QUESTION
   {
     toUser: 0,
     fromUser: 1,
     questionId: 3,
-    answerText:
-      'Very well! Elit ullam autem delectus autem officiis odio Voluptatibus ut nobis.',
     rating: 9,
     scale: 10,
-    type: RATING_AND_TEXT_QUESTION,
+    type: SCALE_QUESTION,
   },
   {
     toUser: 0,
     fromUser: 4,
     questionId: 3,
-    answerText:
-      'Very well! Elit ullam autem delectus autem officiis odio Voluptatibus ut nobis.',
     rating: 7,
     scale: 10,
-    type: RATING_AND_TEXT_QUESTION,
+    type: SCALE_QUESTION,
   },
   {
     toUser: 0,
     fromUser: 1,
     questionId: 4,
-    answerText:
-      'I can always count on this person. Adipisicing sit repellat consectetur accusantium quo. Praesentium expedita totam officia ab fugiat. Non omnis impedit.',
     rating: 7,
     scale: 10,
-    type: RATING_AND_TEXT_QUESTION,
+    type: SCALE_QUESTION,
   },
   {
     toUser: 0,
     fromUser: 2,
     questionId: 4,
-    answerText:
-      'The clients are always happy talking to Jane. Lorem blanditiis suscipit odit debitis!',
     rating: 8,
     scale: 10,
-    type: RATING_AND_TEXT_QUESTION,
+    type: SCALE_QUESTION,
   },
   {
     toUser: 0,
     fromUser: 3,
     questionId: 4,
-    answerText:
-      'The clients are always happy talking to Jane. Lorem blanditiis suscipit odit debitis!',
     rating: 1,
     scale: 10,
-    type: RATING_AND_TEXT_QUESTION,
+    type: SCALE_QUESTION,
   },
 
   // TEXT_ONLY
@@ -126,30 +116,25 @@ const feedbackGivenByMe = [
     toUser: 1,
     fromUser: 0,
     questionId: 3,
-    answerText: 'Lorem sint esse eos quidem iste Nisi molestiae vel odit?',
     rating: 8,
     scale: 10,
-    type: RATING_AND_TEXT_QUESTION,
+    type: SCALE_QUESTION,
   },
   {
     toUser: 1,
     fromUser: 0,
     questionId: 4,
-    answerText:
-      'Sit distinctio quas distinctio placeat excepturi unde. Veritatis aliquid obcaecati asperiores est suscipit dolor, nemo.',
     rating: 2,
     scale: 10,
-    type: RATING_AND_TEXT_QUESTION,
+    type: SCALE_QUESTION,
   },
   {
     toUser: 1,
     fromUser: 0,
     questionId: 5,
-    answerText:
-      'Consectetur dolorem qui praesentium tempora doloribus, debitis. Quas',
     rating: 5,
     scale: 10,
-    type: RATING_AND_TEXT_QUESTION,
+    type: SCALE_QUESTION,
   },
 
   // TEXT_ONLY

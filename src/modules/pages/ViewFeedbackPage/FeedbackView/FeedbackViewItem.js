@@ -4,7 +4,7 @@ import ReactTooltip from 'react-tooltip';
 
 import {
   MULTICHOICE_QUESTION,
-  RATING_AND_TEXT_QUESTION,
+  SCALE_QUESTION,
   TEXT_ONLY_QUESTION,
 } from 'modules/store';
 
@@ -17,25 +17,25 @@ const itemStyle = {
 
 const tooltipId = id => `tooltip-${id}`;
 
-const TextOnlyItem = ({question, answer}) => (
+const TextOnlyItem = ({question, answerText}) => (
   <div>
     <div>{question}</div>
-    <p>{answer}</p>
+    <p>{answerText}</p>
   </div>
 );
 
 TextOnlyItem.propTypes = {
   question: PropTypes.string.isRequired,
-  answer: PropTypes.string,
+  answerText: PropTypes.string,
 };
 
-const RatingScaleItem = ({id, question, answer, rating, scale}) => (
+const RatingScaleItem = ({id, question, tooltip, rating, scale}) => (
   <div style={{display: 'flex', width: '100%'}}>
     <div style={{flexBasis: '50%'}}>{question}</div>
     <RatingScale rating={rating} scale={scale} tooltipId={tooltipId(id)} />
-    {answer && (
+    {tooltip && (
       <ReactTooltip id={tooltipId(id)}>
-        <span>{answer}</span>
+        <span>{tooltip}</span>
       </ReactTooltip>
     )}
   </div>
@@ -44,20 +44,20 @@ const RatingScaleItem = ({id, question, answer, rating, scale}) => (
 RatingScaleItem.propTypes = {
   id: PropTypes.number.isRequired,
   question: PropTypes.string.isRequired,
-  answer: PropTypes.string,
+  tooltip: PropTypes.string,
   rating: PropTypes.number.isRequired,
   scale: PropTypes.number.isRequired,
 };
 
-const FeedbackViewItem = ({id, type, question, answer, rating, scale}) => (
+const FeedbackViewItem = ({id, type, question, answerText, tooltip, rating, scale}) => (
   <div style={itemStyle}>
     {type === TEXT_ONLY_QUESTION ? (
-      <TextOnlyItem question={question} answer={answer} />
+      <TextOnlyItem question={question} answerText={answerText} />
     ) : (
       <RatingScaleItem
         id={id}
         question={question}
-        answer={answer}
+        tooltip={tooltip}
         rating={rating}
         scale={scale}
       />
@@ -69,11 +69,12 @@ FeedbackViewItem.propTypes = {
   id: PropTypes.number.isRequired,
   type: PropTypes.oneOf([
     MULTICHOICE_QUESTION,
-    RATING_AND_TEXT_QUESTION,
+    SCALE_QUESTION,
     TEXT_ONLY_QUESTION,
   ]).isRequired,
   question: PropTypes.string.isRequired,
-  answer: PropTypes.string,
+  answerText: PropTypes.string,
+  tooltip: PropTypes.string,
   rating: PropTypes.number,
   scale: PropTypes.number,
 };

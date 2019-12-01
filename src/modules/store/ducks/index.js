@@ -10,7 +10,7 @@ export {
   selectQuestionAnswerIds,
   selectTotalQuestionCount,
   MULTICHOICE_QUESTION,
-  RATING_AND_TEXT_QUESTION,
+  SCALE_QUESTION,
   TEXT_ONLY_QUESTION,
   reducer as questionsReducer,
 } from './questions';

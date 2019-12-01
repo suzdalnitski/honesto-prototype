@@ -7,7 +7,7 @@ import values from 'lodash/values';
 import {normalizeById} from './util';
 
 export const MULTICHOICE_QUESTION = 'MULTICHOICE_QUESTION';
-export const RATING_AND_TEXT_QUESTION = 'RATING_AND_TEXT_QUESTION';
+export const SCALE_QUESTION = 'SCALE_QUESTION';
 export const TEXT_ONLY_QUESTION = 'TEXT_ONLY_QUESTION';
 
 const multiChoiceQuestions = [
@@ -34,20 +34,20 @@ const multiChoiceQuestions = [
   },
 ];
 
-const ratingAndTextQuestions = [
+const scaleQuestions = [
   {
     id: 3,
-    type: RATING_AND_TEXT_QUESTION,
+    type: SCALE_QUESTION,
     text: 'How well does this person handle stress?',
   },
   {
     id: 4,
-    type: RATING_AND_TEXT_QUESTION,
-    text: 'Can you count on this person in a difficult situation?',
+    type: SCALE_QUESTION,
+    text: 'How much do you value working with this person?',
   },
   {
     id: 5,
-    type: RATING_AND_TEXT_QUESTION,
+    type: SCALE_QUESTION,
     text: 'How well does this person interact with clients?',
   },
 ];
@@ -62,7 +62,7 @@ const textOnlyQuestions = [
 
 const questions = [
   ...multiChoiceQuestions,
-  ...ratingAndTextQuestions,
+  ...scaleQuestions,
   ...textOnlyQuestions,
 ];
 

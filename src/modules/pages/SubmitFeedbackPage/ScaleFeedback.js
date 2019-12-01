@@ -11,7 +11,7 @@ const answerSelector = questionId => state =>
     map(answer => selectAnswer(answer)(state)),
   )(questionId);
 
-const RatingAndTextFeedback = ({onSelect, questionId}) => {
+const ScaleFeedback = ({onSelect, questionId}) => {
   const [selection, setSelection] = useState(-1);
 
   const answers = useSelector(answerSelector(questionId));
@@ -25,9 +25,9 @@ const RatingAndTextFeedback = ({onSelect, questionId}) => {
   );
 };
 
-RatingAndTextFeedback.propTypes = {
+ScaleFeedback.propTypes = {
   questionId: PropTypes.number.isRequired,
   onSelect: PropTypes.func.isRequired,
 };
 
-export default RatingAndTextFeedback;
+export default ScaleFeedback;

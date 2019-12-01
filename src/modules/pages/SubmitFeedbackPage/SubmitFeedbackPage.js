@@ -13,6 +13,9 @@ import {
   selectAnsweredQuestionCount,
   selectUnansweredQuestionIds,
   doSubmitMultichoiceFeedback,
+  MULTICHOICE_QUESTION,
+  SCALE_QUESTION,
+  TEXT_ONLY_QUESTION,
 } from 'modules/store';
 
 import PageHeader from './PageHeader';
@@ -20,6 +23,7 @@ import BackButton from './BackButton';
 import Progress from './Progress';
 
 import MultichoiceFeedback from './MultichoiceFeedback';
+import ScaleFeedback from './ScaleFeedback';
 
 const boxStyle = {
   borderRadius: '4px',
@@ -71,7 +75,7 @@ const useCurrentQuestion = ({toUser, fromUser}) => {
   return currentQuestion;
 };
 
-const useFeedbackDirection = (userid) => {
+const useFeedbackDirection = userid => {
   const meUser = useSelector(selectMeUser);
 
   const feedbackDirection = {
@@ -111,6 +115,28 @@ const useFeedbackState = ({fromUser, toUser}) => {
   return {onNext, nextButtonEnabled: feedbackState !== null, setFeedbackState};
 };
 
+const QuestionView = ({question, setFeedbackState}) => (
+  <>
+    {question.type === MULTICHOICE_QUESTION && (
+      <MultichoiceFeedback
+        questionId={question.id}
+        onSelect={setFeedbackState}
+      />
+    )}
+    {question.type === SCALE_QUESTION && (
+      <ScaleFeedback
+        questionId={question.id}
+        onSelect={setFeedbackState}
+      />
+    )}
+  </>
+);
+
+QuestionView.propTypes = {
+  question: PropTypes.object.isRequired,
+  setFeedbackState: PropTypes.func.isRequired,
+};
+
 const SubmitFeedbackPage = () => {
   // in production, I would handle edge condition, eg parsing failing
   const userid = parseInt(useParams().userid);
@@ -132,14 +158,9 @@ const SubmitFeedbackPage = () => {
       <BackButton />
       <PageHeader username={user.name} question={currentQuestion.text} />
       <div style={boxStyle}>
-        <MultichoiceFeedback
-          questionId={currentQuestion.id}
-          onSelect={({questionId, answerId}) => {
-            setFeedbackState({
-              questionId,
-              answerId,
-            });
-          }}
+        <QuestionView
+          question={currentQuestion}
+          setFeedbackState={setFeedbackState}
         />
         <Buttons onNext={onNext} nextEnabled={nextButtonEnabled} />
         <Progress
