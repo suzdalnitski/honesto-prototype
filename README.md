@@ -69,6 +69,9 @@ Ideally, all of the callbacks have to be memoized. Memoization should also get a
 ## Styling
 While I did my best to adhere to the initial design, some of the UI needs more polishing.
 
+## Responsive design
+We always have to design with mobile devices in mind, however this prototype will only look correctly in a browser. If the prototype is approved, then I would spend some time to make sure that the app looks good on different screen sizes.
+
 ## Clean code
 I typically strive to write clean code on the first try, and refactor as I go. Still, some areas of the codebase might need some cleanup, which I would probably do once the prototype is approved.
 
