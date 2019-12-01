@@ -15,7 +15,7 @@ const initialState = normalizeById(users);
 
 export const reducer = (state = initialState, _action) => state;
 
-const selectAllUsers = state => values(state.users);
+export const selectAllUsers = state => values(state.users);
 
 export const selectNotMeUsers = state =>
   selectAllUsers(state).filter(user => !user.isMe);

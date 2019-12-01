@@ -8,11 +8,13 @@ import difference from 'lodash/fp/difference';
 import {
   selectQuestion,
   selectAllQuestions,
+  selectTotalQuestionCount,
   MULTICHOICE_QUESTION,
   RATING_AND_TEXT_QUESTION,
   TEXT_ONLY_QUESTION,
 } from './questions';
 import {selectAnswer} from './answers';
+import {selectAllUsers} from './users';
 
 import initialState from './feedbackInitialState';
 
@@ -101,3 +103,30 @@ export const selectUnansweredQuestionIds = ({fromUser, toUser}) => state => {
 
 export const selectAnsweredQuestionCount = ({fromUser, toUser}) => state =>
   selectFeedbackForUser({fromUser, toUser})(state).length;
+
+/*
+ * @description selects a map telling whether or not a user has unanswered questions
+ */
+export const selectHasUnansweredQuestions = ({fromUser}) => state => {
+  const allUsers = selectAllUsers(state);
+
+  const hasUnansweredQuestionsArray = allUsers.map(user => {
+    const answeredQuestionsCount = selectAnsweredQuestionCount({
+      fromUser,
+      toUser: user.id,
+    })(state);
+
+    const totalQuestionCount = selectTotalQuestionCount(state);
+
+    return {
+      toUser: user.id,
+      value: answeredQuestionsCount < totalQuestionCount,
+    };
+  });
+
+  const hasUnansweredQuestionsMap = hasUnansweredQuestionsArray.reduce(
+    (acc, val) => ({...acc, [val.toUser]: val.value}),
+    {},
+  );
+  return hasUnansweredQuestionsMap;
+};

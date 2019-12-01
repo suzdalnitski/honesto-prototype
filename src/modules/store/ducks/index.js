@@ -19,6 +19,7 @@ export {
   selectFeedbackForUser,
   selectUnansweredQuestionIds,
   selectAnsweredQuestionCount,
+  selectHasUnansweredQuestions,
   doSubmitMultichoiceFeedback,
   reducer as feedbackReducer,
 } from './feedback.js';
