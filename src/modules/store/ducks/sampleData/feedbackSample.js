@@ -2,7 +2,7 @@ import {
   MULTICHOICE_QUESTION,
   SCALE_QUESTION,
   TEXT_ONLY_QUESTION,
-} from './questions';
+} from '../questions';
 
 const multichoiceFeedbackToMe = (fromUser, questionId, answerId) => ({
   toUser: 0,
@@ -148,7 +148,7 @@ const feedbackGivenByMe = [
   },
 ];
 
-const initialState = [...feedbackGivenToMe, ...feedbackGivenByMe];
+const sampleData = [...feedbackGivenToMe, ...feedbackGivenByMe];
 
-export default initialState;
+export default sampleData;
 

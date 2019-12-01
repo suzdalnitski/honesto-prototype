@@ -5,6 +5,7 @@ const textAreaStyle = {
   width: '100%',
   minHeight: '200px',
   border: 'none',
+  outline: 'none',
 };
 
 const TextOnlyFeedback = ({onChange, value}) => (

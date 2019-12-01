@@ -1,26 +1,23 @@
 import values from 'lodash/values';
 
+import {usersData} from './sampleData';
+
 import {normalizeById} from './util';
 
-const users = [
-  {id: 0, name: 'Jane Smith', isMe: true},
-  {id: 1, name: 'Sarah Johnson'},
-  {id: 2, name: 'Samantha Parker'},
-  {id: 3, name: 'Elizabeth Baker'},
-  {id: 4, name: 'Mary Macleod'},
-];
+// id of the currently logged in user
+const meId = 0;
 
 // normalizing to make the lookups more efficient
-const initialState = normalizeById(users);
+const initialState = normalizeById(usersData);
 
 export const reducer = (state = initialState, _action) => state;
 
 export const selectAllUsers = state => values(state.users);
 
 export const selectNotMeUsers = state =>
-  selectAllUsers(state).filter(user => !user.isMe);
+  selectAllUsers(state).filter(user => user.id !== meId);
 
 export const selectMeUser = state =>
-  selectAllUsers(state).filter(user => user.isMe)[0];
+  selectAllUsers(state).filter(user => user.id === meId)[0];
 
 export const selectUser = id => state => state.users[id];

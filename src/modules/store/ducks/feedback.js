@@ -5,6 +5,8 @@
 import reject from 'lodash/fp/reject';
 import difference from 'lodash/fp/difference';
 
+import {feedbackData} from './sampleData';
+
 import {
   selectQuestion,
   selectAllQuestions,
@@ -16,7 +18,6 @@ import {
 import {selectAnswer} from './answers';
 import {selectAllUsers} from './users';
 
-import initialState from './feedbackInitialState';
 
 // I think it is a good convention to have the Redux actions start with 'DO_' to differentiate the m from other constants
 const DO_SUBMIT_MULTICHOICE_FEEDBACK = 'DO_SUBMIT_MULTICHOICE_FEEDBACK';
@@ -76,7 +77,7 @@ const filterOutExistingFeedback = ({fromUser, toUser, questionId}) => state =>
       feedback.questionId === questionId,
   )(state);
 
-export const reducer = (state = initialState, {type, payload}) => {
+export const reducer = (state = feedbackData, {type, payload}) => {
   // partially applying the function here to make future calls cleaner
   const _filterOutExistingFeedback = filterOutExistingFeedback({
     fromUser: payload && payload.fromUser,
