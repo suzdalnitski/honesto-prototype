@@ -75,5 +75,8 @@ We always have to design with mobile devices in mind, however this prototype wil
 ## Clean code
 I typically strive to write clean code on the first try, and refactor as I go. Still, some areas of the codebase might need some cleanup, which I would probably do once the prototype is approved.
 
+## Error handling
+Currently, the prototype only considers the 'happy path', and completely ignores any error handling. Of course, many things can go wrong, and all of the edge cases have to be handled properly before shipping the app to production.
+
 ## Accessibility
 It is considered a good practice to code with accessibility in mind, which I had to neglect.
