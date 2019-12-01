@@ -16,6 +16,6 @@ export {
 export {selectAnswer, reducer as answersReducer} from './answers';
 export {
   selectFeedbackForUser,
-  selectIsAllFeedbackComplete,
+  doSubmitMultichoiceFeedback,
   reducer as feedbackReducer,
 } from './feedback.js';

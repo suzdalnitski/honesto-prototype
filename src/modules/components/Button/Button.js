@@ -30,7 +30,7 @@ const transparentStyle = {
   color: '#031323',
 };
 
-const secondaryStyle = {
+const disabledStyle = {
   backgroundColor: '#ACB1B6',
   color: '#ffffff',
 };
@@ -40,7 +40,7 @@ const Button = ({
   text,
   primary,
   outline,
-  secondary,
+  disabled,
   transparent,
   goto,
   onClick,
@@ -48,6 +48,8 @@ const Button = ({
   const history = useHistory();
 
   const _onClick = () => {
+    if (disabled) return;
+
     goto && history.push(goto);
     onClick && onClick();
   };
@@ -59,14 +61,13 @@ const Button = ({
         ...defaultStyle,
         ...(primary ? primaryStyle : {}),
         ...(outline ? outlineStyle : {}),
-        ...(secondary ? secondaryStyle : {}),
+        ...(disabled ? disabledStyle : {}),
         ...(transparent ? transparentStyle : {}),
         ...style,
       }}
       className={classNames({
         [cssStyles.primary]: primary,
         [cssStyles.outline]: outline,
-        [cssStyles.secondary]: secondary,
         [cssStyles.transparent]: transparent,
       })}>
       {text}
@@ -83,7 +84,7 @@ Button.propTypes = {
   text: PropTypes.string.isRequired,
   primary: PropTypes.bool,
   outline: PropTypes.bool,
-  secondary: PropTypes.bool,
+  disabled: PropTypes.bool,
   transparent: PropTypes.bool,
   goto: PropTypes.string,
   onClick: PropTypes.func,
