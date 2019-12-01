@@ -1,9 +1,11 @@
 import {createStore, combineReducers} from 'redux';
 
-import {reducer as usersReducer} from './users';
-import {reducer as questionsReducer} from './questions';
-import {reducer as answersReducer} from './answers';
-import {reducer as feedbackReducer} from './feedback';
+import {
+  usersReducer,
+  questionsReducer,
+  answersReducer,
+  feedbackReducer,
+} from './ducks';
 
 const setupStore = () => {
   const reducers = combineReducers({
