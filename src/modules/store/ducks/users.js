@@ -23,4 +23,4 @@ export const selectNotMeUsers = state =>
 export const selectMeUser = state =>
   selectAllUsers(state).filter(user => user.isMe)[0];
 
-export const selectUser = state => id => state.users[id];
+export const selectUser = id => state => state.users[id];

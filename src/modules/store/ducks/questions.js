@@ -71,7 +71,7 @@ const initialState = normalizeById(questions);
 
 export const reducer = (state = initialState, _action) => state;
 
-export const selectQuestion = state => id => state.questions[id];
+export const selectQuestion = id => state => state.questions[id];
 export const selectAllQuestions = state => values(state.questions);
-export const selectQuestionAnswerIds = state => questionId =>
+export const selectQuestionAnswerIds = questionId => state =>
   state.questions[questionId].answerOptions;

@@ -21,9 +21,7 @@ const orderFeedbackList = feedbackList =>
   orderBy(feedbackList, ['type'], ['asc']);
 
 const FeedbackView = ({username, fromUser, toUser}) => {
-  const feedbackList = useSelector(state =>
-    selectFeedbackForUser(state)({fromUser, toUser}),
-  );
+  const feedbackList = useSelector(selectFeedbackForUser({fromUser, toUser}));
 
   return (
     <div style={feedbackViewStyle}>

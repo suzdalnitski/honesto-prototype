@@ -9,8 +9,8 @@ import Option from './Option';
 
 const answerSelector = questionId => state =>
   pipe(
-    selectQuestionAnswerIds(state),
-    map(selectAnswer(state)),
+    questionId => selectQuestionAnswerIds(questionId)(state),
+    map(answer => selectAnswer(answer)(state)),
   )(questionId);
 
 const MultichoiceFeedback = ({onSelect, questionId}) => {

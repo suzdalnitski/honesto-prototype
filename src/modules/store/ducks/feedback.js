@@ -69,14 +69,14 @@ export const reducer = (state = initialState, {type, payload}) => {
   }
 };
 
-export const selectFeedbackForUser = state => ({fromUser, toUser}) => {
+export const selectFeedbackForUser = ({fromUser, toUser}) => state => {
   const relevantFeedback = state.feedback.filter(
     feedback => feedback.toUser === toUser && feedback.fromUser === fromUser,
   );
 
   const feedbackWithQuestion = relevantFeedback.map(feedback => ({
-    question: selectQuestion(state)(feedback.questionId),
-    answer: selectAnswer(state)(feedback.answerId),
+    question: selectQuestion(feedback.questionId)(state),
+    answer: selectAnswer(feedback.answerId)(state),
     ...feedback,
   }));
 

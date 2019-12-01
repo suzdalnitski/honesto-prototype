@@ -60,12 +60,12 @@ const SubmitFeedbackPage = () => {
   // in production, I would handle edge condition, eg parsing failing
   const userid = parseInt(useParams().userid);
 
-  const user = useSelector(state => selectUser(state)(userid));
+  const user = useSelector(selectUser(userid));
   const meUser = useSelector(selectMeUser);
 
   const questionId = 0;
 
-  const question = useSelector(state => selectQuestion(state)(questionId));
+  const question = useSelector(selectQuestion(questionId));
 
   const [feedbackState, setFeedbackState] = useState(null);
   const dispatch = useDispatch();

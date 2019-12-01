@@ -22,9 +22,7 @@ const ViewFeedbackPage = () => {
 
   const [selectedUser, setSelected] = useState(notMeUsers[0].id);
 
-  const selectedUserData = useSelector(state =>
-    selectUser(state)(selectedUser),
-  );
+  const selectedUserData = useSelector(selectUser(selectedUser));
 
   return (
     <Page wide>
