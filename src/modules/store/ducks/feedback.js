@@ -125,18 +125,17 @@ const multichoiceFeedbackByMe = (toUser, questionId, answerId) => ({
 
 const feedbackGivenByMe = [
   // MULTICHOICE
-  multichoiceFeedbackByMe(1, 0, 1),
-  multichoiceFeedbackByMe(1, 1, 3),
-  multichoiceFeedbackByMe(1, 2, 8),
+  multichoiceFeedbackByMe(1, 0, 0),
+  multichoiceFeedbackByMe(1, 1, 4),
+  multichoiceFeedbackByMe(1, 2, 6),
 
   // RATING_AND_TEXT
   {
     toUser: 1,
     fromUser: 0,
     questionId: 3,
-    answerText:
-      'Very well! Elit ullam autem delectus autem officiis odio Voluptatibus ut nobis.',
-    rating: 9,
+    answerText: 'Lorem sint esse eos quidem iste Nisi molestiae vel odit?',
+    rating: 8,
     scale: 10,
     type: RATING_AND_TEXT_QUESTION,
   },
@@ -145,8 +144,8 @@ const feedbackGivenByMe = [
     fromUser: 0,
     questionId: 4,
     answerText:
-      'I can always count on this person. Adipisicing sit repellat consectetur accusantium quo. Praesentium expedita totam officia ab fugiat. Non omnis impedit.',
-    rating: 7,
+      'Sit distinctio quas distinctio placeat excepturi unde. Veritatis aliquid obcaecati asperiores est suscipit dolor, nemo.',
+    rating: 2,
     scale: 10,
     type: RATING_AND_TEXT_QUESTION,
   },
@@ -155,8 +154,8 @@ const feedbackGivenByMe = [
     fromUser: 0,
     questionId: 5,
     answerText:
-      'Lorem ab suscipit impedit alias omnis Ullam aliquam esse unde ullam modi? Eius obcaecati eius',
-    rating: 7,
+      'Consectetur dolorem qui praesentium tempora doloribus, debitis. Quas',
+    rating: 5,
     scale: 10,
     type: RATING_AND_TEXT_QUESTION,
   },
