@@ -9,6 +9,9 @@ import {
   selectUser,
   selectMeUser,
   selectQuestion,
+  selectTotalQuestionCount,
+  selectAnsweredQuestionCount,
+  selectUnansweredQuestionIds,
   doSubmitMultichoiceFeedback,
 } from 'modules/store';
 
@@ -63,7 +66,21 @@ const SubmitFeedbackPage = () => {
   const user = useSelector(selectUser(userid));
   const meUser = useSelector(selectMeUser);
 
-  const questionId = 0;
+  const feedbackDirection = {
+    toUser: userid,
+    fromUser: meUser.id,
+  };
+
+  const answeredQuestionCount = useSelector(
+    selectAnsweredQuestionCount(feedbackDirection),
+  );
+  const totalQuestionCount = useSelector(selectTotalQuestionCount);
+
+  const unansweredQuestions = useSelector(
+    selectUnansweredQuestionIds(feedbackDirection),
+  );
+
+  const questionId = unansweredQuestions[0];
 
   const question = useSelector(selectQuestion(questionId));
 
@@ -73,12 +90,13 @@ const SubmitFeedbackPage = () => {
   const onNext = () => {
     dispatch(
       doSubmitMultichoiceFeedback({
-        toUser: userid,
-        fromUser: meUser.id,
+        ...feedbackDirection,
         questionId: feedbackState.questionId,
         answerId: feedbackState.answerId,
       }),
     );
+
+    setFeedbackState(null);
   };
 
   return (
@@ -96,7 +114,10 @@ const SubmitFeedbackPage = () => {
           }}
         />
         <Buttons onNext={onNext} nextEnabled={feedbackState !== null} />
-        <Progress completed={5} outOf={17} />
+        <Progress
+          completed={answeredQuestionCount}
+          outOf={totalQuestionCount}
+        />
       </div>
     </Page>
   );

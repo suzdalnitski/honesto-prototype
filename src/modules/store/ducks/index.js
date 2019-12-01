@@ -8,6 +8,7 @@ export {
   selectQuestion,
   selectAllQuestions,
   selectQuestionAnswerIds,
+  selectTotalQuestionCount,
   MULTICHOICE_QUESTION,
   RATING_AND_TEXT_QUESTION,
   TEXT_ONLY_QUESTION,
@@ -16,6 +17,8 @@ export {
 export {selectAnswer, reducer as answersReducer} from './answers';
 export {
   selectFeedbackForUser,
+  selectUnansweredQuestionIds,
+  selectAnsweredQuestionCount,
   doSubmitMultichoiceFeedback,
   reducer as feedbackReducer,
 } from './feedback.js';
