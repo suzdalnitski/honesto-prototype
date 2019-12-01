@@ -21,5 +21,6 @@ export {
   selectAnsweredQuestionCount,
   selectHasUnansweredQuestions,
   doSubmitMultichoiceFeedback,
+  doSubmitScaleFeedback,
   reducer as feedbackReducer,
 } from './feedback.js';

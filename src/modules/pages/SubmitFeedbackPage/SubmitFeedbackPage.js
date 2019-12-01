@@ -13,6 +13,7 @@ import {
   selectAnsweredQuestionCount,
   selectUnansweredQuestionIds,
   doSubmitMultichoiceFeedback,
+  doSubmitScaleFeedback,
   MULTICHOICE_QUESTION,
   SCALE_QUESTION,
   TEXT_ONLY_QUESTION,
@@ -95,19 +96,30 @@ const useFeedbackProgress = ({fromUser, toUser}) => {
   return [answeredQuestionCount, totalQuestionCount];
 };
 
-const useFeedbackState = ({fromUser, toUser}) => {
+const useFeedbackState = ({question, fromUser, toUser}) => {
   const [feedbackState, setFeedbackState] = useState(null);
   const dispatch = useDispatch();
 
   const onNext = () => {
-    dispatch(
-      doSubmitMultichoiceFeedback({
-        fromUser,
-        toUser,
-        questionId: feedbackState.questionId,
-        answerId: feedbackState.answerId,
-      }),
-    );
+    question.type === MULTICHOICE_QUESTION &&
+      dispatch(
+        doSubmitMultichoiceFeedback({
+          fromUser,
+          toUser,
+          questionId: question.id,
+          answerId: feedbackState,
+        }),
+      );
+
+    question.type === SCALE_QUESTION &&
+      dispatch(
+        doSubmitScaleFeedback({
+          fromUser,
+          toUser,
+          questionId: question.id,
+          rating: feedbackState,
+        }),
+      );
 
     setFeedbackState(null);
   };
@@ -124,10 +136,7 @@ const QuestionView = ({question, setFeedbackState}) => (
       />
     )}
     {question.type === SCALE_QUESTION && (
-      <ScaleFeedback
-        questionId={question.id}
-        onSelect={setFeedbackState}
-      />
+      <ScaleFeedback questionId={question.id} onRate={setFeedbackState} />
     )}
   </>
 );
@@ -149,9 +158,10 @@ const SubmitFeedbackPage = () => {
     feedbackDirection,
   );
 
-  const {onNext, nextButtonEnabled, setFeedbackState} = useFeedbackState(
-    feedbackDirection,
-  );
+  const {onNext, nextButtonEnabled, setFeedbackState} = useFeedbackState({
+    ...feedbackDirection,
+    question: currentQuestion,
+  });
 
   return (
     <Page>

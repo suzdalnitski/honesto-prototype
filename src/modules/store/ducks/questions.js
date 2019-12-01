@@ -39,16 +39,22 @@ const scaleQuestions = [
     id: 3,
     type: SCALE_QUESTION,
     text: 'How well does this person handle stress?',
+    details:
+      'Amet maiores sit corporis beatae enim aliquam Ut iste voluptates fugit fuga suscipit. Non exercitationem sapiente accusamus molestiae sed Quis laboriosam cumque quaerat delectus quaerat aut placeat Consequatur corrupti saepe?',
   },
   {
     id: 4,
     type: SCALE_QUESTION,
     text: 'How much do you value working with this person?',
+    details:
+      'Amet nisi illo corporis dicta quod. Ipsam nisi corporis ex ipsa amet commodi impedit Voluptate quisquam accusantium iusto nesciunt culpa',
   },
   {
     id: 5,
     type: SCALE_QUESTION,
     text: 'How well does this person interact with clients?',
+    details:
+      'Adipisicing id explicabo aliquam iste iste Molestias ex voluptas debitis molestias cupiditate? Qui non nulla commodi ut quas impedit adipisci in Adipisci perferendis deleniti at non fuga odit. Aperiam doloribus voluptates minima voluptates quidem. Voluptatem molestias consequatur vitae saepe dolorem.',
   },
 ];
 

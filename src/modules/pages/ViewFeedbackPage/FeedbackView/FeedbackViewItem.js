@@ -8,7 +8,7 @@ import {
   TEXT_ONLY_QUESTION,
 } from 'modules/store';
 
-import RatingScale from './RatingScale';
+import {RatingScale} from 'modules/components';
 
 const itemStyle = {
   border: '1px solid #D9DCDE',

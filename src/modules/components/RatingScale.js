@@ -20,13 +20,15 @@ const itemStyle = ({color, width}) => ({
   marginLeft: '5px',
 });
 
-const RatingScaleItem = ({color, width}) => (
-  <div style={itemStyle({color, width})}></div>
+const RatingScaleItem = ({color, width, onClick}) => (
+  // should use button when onClick is present for accessibility
+  <div onClick={onClick} style={itemStyle({color, width})}></div>
 );
 
 RatingScaleItem.propTypes = {
   color: PropTypes.string.isRequired,
   width: PropTypes.number.isRequired,
+  onClick: PropTypes.func,
 };
 
 const calcColor = ({rating, scale}) =>
@@ -34,23 +36,46 @@ const calcColor = ({rating, scale}) =>
 
 const calcWidth = ({scale}) => (1.0 / scale) * 0.9;
 
-const RatingScale = ({rating, scale, tooltipId}) => (
-  <div style={ratingScaleStyle} data-tip data-for={tooltipId}>
+const RatingScale = ({
+  rating,
+  scale,
+  tooltipId,
+  color,
+  style,
+  showEmpty,
+  onRate,
+}) => (
+  <div style={{...ratingScaleStyle, ...style}} data-tip data-for={tooltipId}>
     {range(rating).map(i => (
       <RatingScaleItem
         key={i}
-        color={calcColor({rating, scale})}
+        color={color || calcColor({rating, scale})}
         width={calcWidth({scale})}
+        onClick={() => onRate && onRate(i + 1, scale)}
       />
     ))}
+    {// if showEmpty, then display the remaining items as grey
+    showEmpty &&
+      range(scale - rating).map(i => (
+        <RatingScaleItem
+          key={i}
+          color="#dddddd"
+          width={calcWidth({scale})}
+          onClick={() => onRate && onRate(rating + i + 1, scale)}
+        />
+      ))}
     <FlexSpacer />
   </div>
 );
 
 RatingScale.propTypes = {
-  tooltipId: PropTypes.string.isRequired,
+  tooltipId: PropTypes.string,
   rating: PropTypes.number.isRequired,
   scale: PropTypes.oneOf([3, 10]).isRequired,
+  color: PropTypes.string,
+  style: PropTypes.object,
+  showEmpty: PropTypes.bool,
+  onRate: PropTypes.func,
 };
 
 export default RatingScale;

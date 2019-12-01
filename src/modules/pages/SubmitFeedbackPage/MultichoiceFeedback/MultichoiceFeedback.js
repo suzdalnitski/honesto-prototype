@@ -29,7 +29,7 @@ const MultichoiceFeedback = ({onSelect, questionId}) => {
           // In production I would memoize the onClick event handler
           onClick={() => {
             setSelection(id);
-            onSelect({questionId, answerId: id});
+            onSelect(id);
           }}
         />
       ))}

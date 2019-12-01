@@ -20,7 +20,7 @@ import initialState from './feedbackInitialState';
 
 // I think it is a good convention to have the Redux actions start with 'DO_' to differentiate the m from other constants
 const DO_SUBMIT_MULTICHOICE_FEEDBACK = 'DO_SUBMIT_MULTICHOICE_FEEDBACK';
-const DO_SUBMIT_SCALE_QUESTION = 'DO_SUBMIT_SCALE_QUESTION';
+const DO_SUBMIT_SCALE_FEEDBACK = 'DO_SUBMIT_SCALE_FEEDBACK';
 const DO_SUBMIT_TEXT_ONLY_FEEDBACK = 'DO_SUBMIT_TEXT_ONLY_FEEDBACK';
 
 export const doSubmitMultichoiceFeedback = ({
@@ -38,19 +38,17 @@ export const doSubmitMultichoiceFeedback = ({
   },
 });
 
-export const doSubmitScaleQuestion = ({
+export const doSubmitScaleFeedback = ({
   toUser,
   fromUser,
   questionId,
-  answerText,
   rating
 }) => ({
-  type: DO_SUBMIT_SCALE_QUESTION,
+  type: DO_SUBMIT_SCALE_FEEDBACK,
   payload: {
     toUser,
     fromUser,
     questionId,
-    answerText,
     rating,
   },
 });
@@ -87,7 +85,7 @@ export const reducer = (state = initialState, {type, payload}) => {
         },
       ];
 
-    case DO_SUBMIT_SCALE_QUESTION:
+    case DO_SUBMIT_SCALE_FEEDBACK:
       return [
         ..._filterOutExistingFeedback(state),
         {
@@ -106,7 +104,7 @@ export const reducer = (state = initialState, {type, payload}) => {
   }
 };
 
-// in production, I would definitely memoize such heavy selectors
+// in production, I would definitely memoize such heavy selectors for performance reasons
 export const selectFeedbackForUser = ({fromUser, toUser}) => state => {
   const relevantFeedback = state.feedback.filter(
     feedback => feedback.toUser === toUser && feedback.fromUser === fromUser,

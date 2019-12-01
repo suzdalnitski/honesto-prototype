@@ -1,26 +1,28 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {useSelector} from 'react-redux';
-import {pipe, map} from 'lodash/fp';
 
-import {selectQuestionAnswerIds, selectAnswer} from 'modules/store';
+import {selectQuestion} from 'modules/store';
+import {RatingScale} from 'modules/components';
 
-const answerSelector = questionId => state =>
-  pipe(
-    questionId => selectQuestionAnswerIds(questionId)(state),
-    map(answer => selectAnswer(answer)(state)),
-  )(questionId);
-
-const ScaleFeedback = ({onSelect, questionId}) => {
-  const [selection, setSelection] = useState(-1);
-
-  const answers = useSelector(answerSelector(questionId));
+const ScaleFeedback = ({questionId, onRate}) => {
+  const question = useSelector(selectQuestion(questionId));
+  const [rating, setRating] = useState(0);
 
   return (
     <div>
-      {answers.map(({id, text, title}) => (
-        <div />
-      ))}
+      <p style={{padding: '15px'}}>{question.details}</p>
+      <RatingScale
+        rating={rating}
+        scale={10}
+        color="#AB61E5"
+        style={{marginTop: '20px'}}
+        showEmpty
+        onRate={(rating, _scale) => {
+          setRating(rating);
+          onRate(rating);
+        }}
+      />
     </div>
   );
 };
@@ -28,6 +30,7 @@ const ScaleFeedback = ({onSelect, questionId}) => {
 ScaleFeedback.propTypes = {
   questionId: PropTypes.number.isRequired,
   onSelect: PropTypes.func.isRequired,
+  onRate: PropTypes.func.isRequired,
 };
 
 export default ScaleFeedback;
