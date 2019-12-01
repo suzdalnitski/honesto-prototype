@@ -20,7 +20,7 @@ import initialState from './feedbackInitialState';
 
 // I think it is a good convention to have the Redux actions start with 'DO_' to differentiate the m from other constants
 const DO_SUBMIT_MULTICHOICE_FEEDBACK = 'DO_SUBMIT_MULTICHOICE_FEEDBACK';
-const DO_SUBMIT_RATING_AND_TEXT_FEDBACK = 'DO_SUBMIT_RATING_AND_TEXT_FEDBACK';
+const DO_SUBMIT_RATING_AND_TEXT_FEEDBACK = 'DO_SUBMIT_RATING_AND_TEXT_FEEDBACK';
 const DO_SUBMIT_TEXT_ONLY_FEEDBACK = 'DO_SUBMIT_TEXT_ONLY_FEEDBACK';
 
 export const doSubmitMultichoiceFeedback = ({
@@ -35,7 +35,23 @@ export const doSubmitMultichoiceFeedback = ({
     fromUser,
     questionId,
     answerId,
-    scale: 3,
+  },
+});
+
+export const doSubmitRatingAndTextFedback = ({
+  toUser,
+  fromUser,
+  questionId,
+  answerText,
+  rating
+}) => ({
+  type: DO_SUBMIT_RATING_AND_TEXT_FEEDBACK,
+  payload: {
+    toUser,
+    fromUser,
+    questionId,
+    answerText,
+    rating,
   },
 });
 
@@ -63,13 +79,28 @@ export const reducer = (state = initialState, {type, payload}) => {
         // append new feedback
         {
           type: MULTICHOICE_QUESTION,
+          scale: 3,
           toUser: payload.toUser,
           fromUser: payload.fromUser,
           questionId: payload.questionId,
           answerId: payload.answerId,
-          scale: payload.scale,
         },
       ];
+
+    case DO_SUBMIT_RATING_AND_TEXT_FEEDBACK:
+      return [
+        ..._filterOutExistingFeedback(state),
+        {
+          type: RATING_AND_TEXT_QUESTION,
+          scale: 10,
+          toUser: payload.toUser,
+          fromUser: payload.fromUser,
+          questionId: payload.questionId,
+          answerText: payload.answerText,
+          rating: payload.rating,
+        },
+      ];
+
 
     default:
       return state;

@@ -59,11 +59,19 @@ Buttons.propTypes = {
   nextEnabled: PropTypes.bool,
 };
 
-const SubmitFeedbackPage = () => {
-  // in production, I would handle edge condition, eg parsing failing
-  const userid = parseInt(useParams().userid);
+const useCurrentQuestion = ({toUser, fromUser}) => {
+  const unansweredQuestions = useSelector(
+    selectUnansweredQuestionIds({toUser, fromUser}),
+  );
 
-  const user = useSelector(selectUser(userid));
+  const currentQuestionId = unansweredQuestions[0];
+
+  const currentQuestion = useSelector(selectQuestion(currentQuestionId));
+
+  return currentQuestion;
+};
+
+const useFeedbackDirection = (userid) => {
   const meUser = useSelector(selectMeUser);
 
   const feedbackDirection = {
@@ -71,26 +79,27 @@ const SubmitFeedbackPage = () => {
     fromUser: meUser.id,
   };
 
+  return feedbackDirection;
+};
+
+const useFeedbackProgress = ({fromUser, toUser}) => {
   const answeredQuestionCount = useSelector(
-    selectAnsweredQuestionCount(feedbackDirection),
+    selectAnsweredQuestionCount({fromUser, toUser}),
   );
   const totalQuestionCount = useSelector(selectTotalQuestionCount);
 
-  const unansweredQuestions = useSelector(
-    selectUnansweredQuestionIds(feedbackDirection),
-  );
+  return [answeredQuestionCount, totalQuestionCount];
+};
 
-  const questionId = unansweredQuestions[0];
-
-  const question = useSelector(selectQuestion(questionId));
-
+const useFeedbackState = ({fromUser, toUser}) => {
   const [feedbackState, setFeedbackState] = useState(null);
   const dispatch = useDispatch();
 
   const onNext = () => {
     dispatch(
       doSubmitMultichoiceFeedback({
-        ...feedbackDirection,
+        fromUser,
+        toUser,
         questionId: feedbackState.questionId,
         answerId: feedbackState.answerId,
       }),
@@ -99,13 +108,32 @@ const SubmitFeedbackPage = () => {
     setFeedbackState(null);
   };
 
+  return {onNext, nextButtonEnabled: feedbackState !== null, setFeedbackState};
+};
+
+const SubmitFeedbackPage = () => {
+  // in production, I would handle edge condition, eg parsing failing
+  const userid = parseInt(useParams().userid);
+
+  const feedbackDirection = useFeedbackDirection(userid);
+  const currentQuestion = useCurrentQuestion(feedbackDirection);
+  const user = useSelector(selectUser(userid));
+
+  const [answeredQuestionCount, totalQuestionCount] = useFeedbackProgress(
+    feedbackDirection,
+  );
+
+  const {onNext, nextButtonEnabled, setFeedbackState} = useFeedbackState(
+    feedbackDirection,
+  );
+
   return (
     <Page>
       <BackButton />
-      <PageHeader username={user.name} question={question.text} />
+      <PageHeader username={user.name} question={currentQuestion.text} />
       <div style={boxStyle}>
         <MultichoiceFeedback
-          questionId={questionId}
+          questionId={currentQuestion.id}
           onSelect={({questionId, answerId}) => {
             setFeedbackState({
               questionId,
@@ -113,7 +141,7 @@ const SubmitFeedbackPage = () => {
             });
           }}
         />
-        <Buttons onNext={onNext} nextEnabled={feedbackState !== null} />
+        <Buttons onNext={onNext} nextEnabled={nextButtonEnabled} />
         <Progress
           completed={answeredQuestionCount}
           outOf={totalQuestionCount}
