@@ -42,7 +42,7 @@ export const doSubmitScaleFeedback = ({
   toUser,
   fromUser,
   questionId,
-  rating
+  rating,
 }) => ({
   type: DO_SUBMIT_SCALE_FEEDBACK,
   payload: {
@@ -50,6 +50,21 @@ export const doSubmitScaleFeedback = ({
     fromUser,
     questionId,
     rating,
+  },
+});
+
+export const doSubmitTextOnlyFeedback = ({
+  toUser,
+  fromUser,
+  questionId,
+  answerText,
+}) => ({
+  type: DO_SUBMIT_TEXT_ONLY_FEEDBACK,
+  payload: {
+    toUser,
+    fromUser,
+    questionId,
+    answerText,
   },
 });
 
@@ -98,6 +113,17 @@ export const reducer = (state = initialState, {type, payload}) => {
         },
       ];
 
+    case DO_SUBMIT_TEXT_ONLY_FEEDBACK:
+      return [
+        ..._filterOutExistingFeedback(state),
+        {
+          type: TEXT_ONLY_QUESTION,
+          toUser: payload.toUser,
+          fromUser: payload.fromUser,
+          questionId: payload.questionId,
+          answerText: payload.answerText,
+        },
+      ];
 
     default:
       return state;

@@ -22,5 +22,6 @@ export {
   selectHasUnansweredQuestions,
   doSubmitMultichoiceFeedback,
   doSubmitScaleFeedback,
+  doSubmitTextOnlyFeedback,
   reducer as feedbackReducer,
 } from './feedback.js';

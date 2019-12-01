@@ -14,6 +14,7 @@ import {
   selectUnansweredQuestionIds,
   doSubmitMultichoiceFeedback,
   doSubmitScaleFeedback,
+  doSubmitTextOnlyFeedback,
   MULTICHOICE_QUESTION,
   SCALE_QUESTION,
   TEXT_ONLY_QUESTION,
@@ -25,6 +26,7 @@ import Progress from './Progress';
 
 import MultichoiceFeedback from './MultichoiceFeedback';
 import ScaleFeedback from './ScaleFeedback';
+import TextOnlyFeedback from './TextOnlyFeedback';
 
 const boxStyle = {
   borderRadius: '4px',
@@ -100,13 +102,18 @@ const useFeedbackState = ({question, fromUser, toUser}) => {
   const [feedbackState, setFeedbackState] = useState(null);
   const dispatch = useDispatch();
 
+  // this entire handler can be significantly simplified
   const onNext = () => {
+    const commonParams = {
+      fromUser,
+      toUser,
+      questionId: question.id,
+    };
+
     question.type === MULTICHOICE_QUESTION &&
       dispatch(
         doSubmitMultichoiceFeedback({
-          fromUser,
-          toUser,
-          questionId: question.id,
+          ...commonParams,
           answerId: feedbackState,
         }),
       );
@@ -114,20 +121,31 @@ const useFeedbackState = ({question, fromUser, toUser}) => {
     question.type === SCALE_QUESTION &&
       dispatch(
         doSubmitScaleFeedback({
-          fromUser,
-          toUser,
-          questionId: question.id,
+          ...commonParams,
           rating: feedbackState,
+        }),
+      );
+
+    question.type === TEXT_ONLY_QUESTION &&
+      dispatch(
+        doSubmitTextOnlyFeedback({
+          ...commonParams,
+          answerText: feedbackState,
         }),
       );
 
     setFeedbackState(null);
   };
 
-  return {onNext, nextButtonEnabled: feedbackState !== null, setFeedbackState};
+  return {
+    onNext,
+    nextButtonEnabled: feedbackState !== null,
+    setFeedbackState,
+    feedbackState,
+  };
 };
 
-const QuestionView = ({question, setFeedbackState}) => (
+const QuestionView = ({question, feedbackState, setFeedbackState}) => (
   <>
     {question.type === MULTICHOICE_QUESTION && (
       <MultichoiceFeedback
@@ -136,13 +154,21 @@ const QuestionView = ({question, setFeedbackState}) => (
       />
     )}
     {question.type === SCALE_QUESTION && (
-      <ScaleFeedback questionId={question.id} onRate={setFeedbackState} />
+      <ScaleFeedback
+        questionId={question.id}
+        onChange={setFeedbackState}
+        value={feedbackState}
+      />
+    )}
+    {question.type === TEXT_ONLY_QUESTION && (
+      <TextOnlyFeedback onChange={setFeedbackState} value={feedbackState} />
     )}
   </>
 );
 
 QuestionView.propTypes = {
   question: PropTypes.object.isRequired,
+  feedbackState: PropTypes.any,
   setFeedbackState: PropTypes.func.isRequired,
 };
 
@@ -158,7 +184,12 @@ const SubmitFeedbackPage = () => {
     feedbackDirection,
   );
 
-  const {onNext, nextButtonEnabled, setFeedbackState} = useFeedbackState({
+  const {
+    onNext,
+    nextButtonEnabled,
+    setFeedbackState,
+    feedbackState,
+  } = useFeedbackState({
     ...feedbackDirection,
     question: currentQuestion,
   });
@@ -170,6 +201,7 @@ const SubmitFeedbackPage = () => {
       <div style={boxStyle}>
         <QuestionView
           question={currentQuestion}
+          feedbackState={feedbackState}
           setFeedbackState={setFeedbackState}
         />
         <Buttons onNext={onNext} nextEnabled={nextButtonEnabled} />
