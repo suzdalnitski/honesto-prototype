@@ -33,7 +33,7 @@ const FeedbackView = ({username, fromUser, toUser}) => {
             id={index}
             type={type}
             question={question.text}
-            answer={answerText}
+            answerText={answerText}
             tooltip={(answer && answer.text) || (question && question.details)}
             rating={rating || (answer && answer.rating)}
             scale={scale}

@@ -11,7 +11,7 @@ const TextOnlyFeedback = ({onChange, value}) => (
   <div>
     <textarea
       style={textAreaStyle}
-      value={value}
+      value={value || ""}
       placeholder="Say something"
       onChange={event => {
         onChange(event.target.value);

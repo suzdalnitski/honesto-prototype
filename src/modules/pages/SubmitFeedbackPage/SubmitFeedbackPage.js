@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {useParams} from 'react-router-dom';
+import {useParams, Redirect} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 
 import {Button} from 'modules/components';
@@ -193,6 +193,10 @@ const SubmitFeedbackPage = () => {
     ...feedbackDirection,
     question: currentQuestion,
   });
+
+  const hasFeedbackToGive = answeredQuestionCount < totalQuestionCount;
+
+  if (!hasFeedbackToGive) return <Redirect to="/share-feedback" />
 
   return (
     <Page>

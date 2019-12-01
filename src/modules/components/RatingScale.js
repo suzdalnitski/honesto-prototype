@@ -70,7 +70,7 @@ const RatingScale = ({
 
 RatingScale.propTypes = {
   tooltipId: PropTypes.string,
-  rating: PropTypes.number.isRequired,
+  rating: PropTypes.number,
   scale: PropTypes.oneOf([3, 10]).isRequired,
   color: PropTypes.string,
   style: PropTypes.object,
